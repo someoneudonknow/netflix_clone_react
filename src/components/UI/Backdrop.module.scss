@@ -1,0 +1,17 @@
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.4;
+    z-index: var(--layer-2);
+    animation: flash linear .4s;
+}
+
+@keyframes flash {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

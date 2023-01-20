@@ -1,0 +1,13 @@
+.sectionWrapper{
+    padding: 7rem 4.5rem;
+    border-bottom: 0.8rem solid rgb(34, 34, 34);
+    color: var(--white-color);
+    background: #000000;
+
+    .contentWrapper{
+        max-width: 120rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
+    }
+}

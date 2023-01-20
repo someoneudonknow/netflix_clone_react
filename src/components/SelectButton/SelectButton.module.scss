@@ -1,0 +1,71 @@
+.languagesChosseBtn {
+  position: relative;
+  border: 1px solid;
+  border-radius: 0.3rem;
+  font-size: 1.7rem;
+  color: var(--white-color);
+  padding: 0.7rem 1rem;
+  transition: all ease 0.2s;
+  cursor: pointer;
+  z-index: 100;
+  display: inline-block;
+
+  .languagesBtnContent {
+    display: flex;
+    align-items: center;
+    span {
+      margin: 0 1rem;
+    }
+  }
+
+  .options {
+    margin-top: 1rem;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 0.1rem solid var(--white-color);
+    border-radius: 0.5rem;
+    z-index: 200;
+    max-height: 33.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 0.7rem;
+      border-collapse: collapse;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--primary-black);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 100vmax;
+      margin-left: -1px;
+      background-color: #d6dee1;
+      transition: all linear .3s;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #a8bbbf;
+    }
+
+    .choice {
+      display: block;
+      width: 100%;
+      font-size: 1.7rem;
+      padding: 0.7rem;
+      border: 1px solid var(--white-color);
+      background: transparent;
+      color: var(--white-color);
+      transition: all ease 0.2s;
+
+      &:hover {
+        background-color: var(--white-color);
+        color: black;
+        cursor: pointer;
+      }
+    }
+  }
+}

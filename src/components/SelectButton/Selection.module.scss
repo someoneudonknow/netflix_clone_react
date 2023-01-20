@@ -1,0 +1,16 @@
+.choice {
+    display: block;
+    width: 100%;
+    font-size: 1.7rem;
+    padding: 0.7rem;
+    border: 1px solid var(--white-color);
+    background: transparent;
+    color: var(--white-color);
+    transition: all ease 0.2s;
+
+    &:hover {
+      background-color: var(--white-color);
+      color: black;
+      cursor: pointer;
+    }
+  }

@@ -1,0 +1,28 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #181818;
+  padding-left: 5rem;
+  z-index: var(--layer-1);
+  overflow: hidden;
+
+  .wrapper {
+    display: flex;
+    position: absolute;
+
+    .eachChildWrapper {
+      .skeleton {
+        margin-top: 5rem;
+        margin-right: 2rem;
+      }
+    }
+  }
+
+  .fullBg {
+    height: 70vh;
+    width: 100%;
+  }
+}

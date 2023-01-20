@@ -1,0 +1,67 @@
+.cardWrapper {
+  background-color: #2f2f2f !important;
+  color: var(--white-color);
+  position: relative;
+  transition: all linear .3s;
+  height: 36rem;
+  
+  .cardImage{
+    height: 15rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    .playBtn {
+      display: block;
+    }
+  }
+
+  .duration {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .imgSkeleton{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+
+  .playBtn {
+    position: absolute;
+    left: 50%;
+    transition: all linear .3s;
+    top: 14%;
+    transform: translateX(-50%);
+    height: 5rem;
+    width: 5rem;
+    border-color: var(--white-color);
+    background-color: rgba(30, 30, 20, 0.5);
+    display: none;
+  }
+
+  .cardBody {
+    padding: 1.8rem 1.4rem;
+    .year {
+      font-size: 1.8rem;
+      max-width: 80%;
+    }
+
+    .cardText {
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      line-height: 2rem;
+      color: rgb(210, 210, 210);
+
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

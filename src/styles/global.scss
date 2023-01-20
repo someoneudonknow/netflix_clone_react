@@ -1,0 +1,67 @@
+@import "~bootstrap/scss/bootstrap";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-text: #aeaca9;
+  --lighter-primary-text: #e3e0d9;
+  --white-color: #fff;
+  --primary-black: #141414;
+  --primary-black-2: #181818;
+  --primary-red: #d80813;
+  --lighter-primary-red: #f40612;
+  --layer-1: 100000;
+  --layer-2: 10000;
+  --layer-3: 1000;
+  --layer-4: 100;
+  --layer-5: 10;
+  --layer-6: 1;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  background-color: var(--primary-black);
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+$scale: 0.6;
+@keyframes appear {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale($scale);
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus{
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #212529 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}

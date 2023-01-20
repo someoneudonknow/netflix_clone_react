@@ -1,0 +1,18 @@
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+  span {
+    height: 100%;
+
+    img {
+      height: 100%;
+    }
+  }
+  .title {
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+    text-transform: uppercase;
+    letter-spacing: 0.7rem;
+    color: white;
+  }
+}

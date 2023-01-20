@@ -1,0 +1,44 @@
+.wrapper {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #181818;
+}
+
+.navBar {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 10%,
+    transparent
+  );
+  background-color: black;
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+
+  .goBackBtn {
+    color: white;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    i {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.skeletonWrapper {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary-black);
+  z-index: var(--layer-1);
+
+  .navBarSkeleton{
+    margin-bottom: 1rem;
+  }
+}

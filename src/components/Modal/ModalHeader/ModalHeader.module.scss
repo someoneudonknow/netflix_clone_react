@@ -1,0 +1,58 @@
+.container {
+  height: 53rem;
+  padding: 0 6rem;
+  position: relative;
+  background-image: linear-gradient(to top, #181818 5%, transparent 50%);
+
+  .closeBtn {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    background-color: #181818;
+    border-color: #181818;
+
+    svg {
+      outline: none;
+    }
+  }
+
+  .headerContent {
+    width: 100%;
+    display: inline-block;
+
+    .actions {
+      display: flex;
+      align-items: center;
+
+      .roundedBtn,
+      .button {
+        margin-right: 1rem;
+      }
+
+      .roundedBtn {
+        height: 5rem;
+        width: 5rem;
+        font-size: 2rem;
+        display: grid;
+        place-items: center;
+      }
+
+      .button {
+        padding: 1rem 3rem;
+        font-size: 2rem;
+      }
+    }
+
+    .tittle {
+      margin-top: 27rem;
+      margin-bottom: -0.5rem;
+    }
+
+    .movieName {
+      font-size: 5rem;
+      color: var(--white-color);
+      text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+      margin-bottom: 4rem;
+    }
+  }
+}

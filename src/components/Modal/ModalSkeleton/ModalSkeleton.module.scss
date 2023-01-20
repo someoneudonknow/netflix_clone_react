@@ -1,0 +1,10 @@
+.modalSkeleton {
+  border-radius: 1rem;
+  width: 90rem;
+
+  .backgroundSkeleton {
+    height: 50rem;
+    overflow: hidden;
+    padding: 1rem;
+  }
+}

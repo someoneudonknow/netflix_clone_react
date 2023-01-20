@@ -1,0 +1,81 @@
+.footerWrapper {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background-color: var(--primary-black) !important;
+
+  .footerContent {
+    padding: 6rem 10rem 3rem 10rem;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    row-gap: 1rem;
+    width: 140rem;
+
+    .socialsList {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+      margin-bottom: 1rem;
+      a {
+        color: var(--white-color);
+        i {
+          font-size: 2.7rem;
+        }
+      }
+    }
+
+    .contactInfo {
+      width: 100%;
+
+      ul {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 2rem;
+        list-style: none;
+        padding-inline: 0;
+        li {
+          a {
+            color: var(--primary-text);
+            text-decoration: none;
+            font-size: 1.5rem;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    .serviceCode {
+      margin-top: 2rem;
+
+      span {
+        padding: 0.7rem;
+        font-size: 1.3rem;
+        color: var(--primary-text);
+        border: 1px solid var(--primary-text);
+        transition: all linear .16s;
+        &:hover {
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .copyright {
+      font-size: 1.3em;
+      margin-top: 1.5rem;
+      color: var(--primary-text);
+      pointer-events: none;
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+      -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none; /* Non-*/
+    }
+  }
+}

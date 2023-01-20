@@ -1,0 +1,17 @@
+.listTitle {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  margin-top: 6rem;
+  align-items: center;
+  margin-bottom: 1.8rem;
+  h3 {
+    font-size: 3rem;
+    color: var(--white-color);
+
+    &:nth-child(2) {
+      font-size: 2rem;
+      font-weight: normal;
+    }
+  }
+}

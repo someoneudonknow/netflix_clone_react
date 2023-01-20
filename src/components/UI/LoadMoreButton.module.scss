@@ -1,0 +1,32 @@
+.loadMoreBtn {
+  width: 100%;
+  border-bottom: 2px solid rgb(64, 64, 64);
+  position: relative;
+  display: flex;
+  height: 6em;
+  margin-top: -6em;
+  justify-content: center;
+  bottom: 0;
+  background-image: linear-gradient(
+    0deg,
+    rgb(24, 24, 24) 0px,
+    rgba(23, 23, 23, 0.7) 20%,
+    rgba(23, 23, 23, 0.4) 30%,
+    transparent 50%
+  );
+
+  .loadMore {
+    position: absolute;
+    bottom: -1.8rem;
+    max-height: 42px;
+    max-width: 42px;
+    min-height: 32px;
+    min-width: 32px;
+    border-width: 2px;
+    background-color: rgba(42, 42, 42, 0.6);
+
+    &:not(:disabled):hover {
+      background-color: rgb(84, 84, 84);
+    }
+  }
+}

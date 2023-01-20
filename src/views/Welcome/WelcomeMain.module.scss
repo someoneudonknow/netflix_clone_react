@@ -1,0 +1,136 @@
+.textWrapper {
+  width: 50%;
+  text-align: left;
+  margin-right: 5rem;
+  h1 {
+    font-size: 6rem;
+    line-height: 1;
+    font-weight: 600;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    font-size: 2.7rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  a{
+    font-size: 2.7rem;
+    text-decoration: none;
+    color: var(--white-color);
+  }
+}
+
+.tvWrapper {
+  width: 60%;
+  position: relative;
+
+  img {
+    max-width: 100%;
+  }
+
+  video {
+    width: calc(100% - 17rem);
+    position: absolute;
+    left: 8.2rem;
+    top: 10rem;
+  }
+}
+
+.mobileWrapper {
+  $imgMargin: 11rem;
+  position: relative;
+
+  .mobileImg {
+    height: 43rem;
+    object-fit: cover;
+    object-position: center;
+    margin-left: -10rem;
+    margin-right: $imgMargin;
+  }
+
+  .downloadAnimation {
+    position: absolute;
+    height: 12rem;
+    min-width: 34rem;
+    padding: 1.5rem;
+    border: 0.2rem solid #292929;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(calc(-50% - $imgMargin));
+    display: flex;
+    align-items: center;
+    border-radius: 1.5rem;
+    background-color: #000000;
+
+    .posterWrapper {
+      height: 100%;
+      img {
+        max-height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+
+    span {
+      margin-left: 2rem;
+      margin-right: 9rem;
+      .title,
+      .loading {
+        white-space: nowrap;
+      }
+
+      .title {
+        font-size: 2rem;
+        font-weight: 600;
+      }
+
+      .loading {
+        font-size: 1.7rem;
+        font-weight: 400;
+        color: #0071eb;
+      }
+    }
+
+    .animation {
+      margin-right: 1rem;
+      i {
+        font-size: 2rem;
+        animation: float 1.6s ease infinite;
+      }
+    }
+  }
+}
+
+
+.contactAndInfo{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .contactAndInfoTittle{
+        font-size: 6rem;
+        font-weight: 500;
+        margin-bottom: 5rem;
+    }
+
+    .contactAndInfoText{
+        text-align: center;
+        margin-top: 5rem;
+        margin-bottom: 3rem;
+        font-size: 2.3rem;
+    }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(-0.5rem);
+  }
+  50% {
+    transform: translateY(0.5rem);
+  }
+}

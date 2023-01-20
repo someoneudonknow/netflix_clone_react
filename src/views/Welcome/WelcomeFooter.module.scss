@@ -1,0 +1,29 @@
+.questionsList {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  row-gap: 1.7rem;
+  font-size: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+.selectBtn {
+  margin-top: 2rem;
+  padding: 1.7rem;
+  color: var(--primary-text);
+
+  .selection {
+    background-color: #000000;
+    font-size: 1.5rem;
+
+    &:hover {
+      background-color: var(--white-color);
+    }
+  }
+}
+
+.location {
+  margin: 2.4rem 0 1.3rem 0;
+  font-size: 1.7rem;
+  color: var(--primary-text);
+}

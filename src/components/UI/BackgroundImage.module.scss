@@ -1,0 +1,11 @@
+.container {
+    min-height: 100vh;
+    position: relative;
+    
+    img {
+        position: absolute;
+        top: 3rem;
+        left: 6.3rem;
+        max-height: 6rem;
+    }
+}

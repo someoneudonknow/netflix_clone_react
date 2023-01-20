@@ -1,0 +1,77 @@
+.container {
+  min-height: 105vh;
+  display: flex;
+  position: relative;
+  background-image: linear-gradient(
+    to top,
+    #141414 5%,
+    transparent 50%
+  ) !important;
+
+  .ageValid {
+    position: absolute;
+    padding: 0.5rem 2rem;
+    background-color: rgba(51, 51, 51, 0.6);
+    right: 0;
+    min-width: 12rem;
+    border-left: 0.3rem solid #dcdcdc;
+    bottom: 30rem;
+    font-size: 2rem;
+    color: var(--white-color);
+  }
+
+  .contentWrapper {
+    max-width: 55rem;
+    margin-left: 5.6rem;
+    margin-top: 20rem;
+    width: 50%;
+
+    .movieName,
+    .movieDesc {
+      text-shadow: 2px 2px 4px rgb(0 0 0 / 45%);
+    }
+
+    .movieName {
+      font-size: 7rem;
+      margin-bottom: 3rem;
+    }
+
+    .movieDesc {
+      $limitLine: 5;
+      font-size: 2.2rem;
+      margin-bottom: 4rem;
+      line-height: 1.3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: $limitLine; /* number of lines to show */
+      line-clamp: $limitLine;
+      -webkit-box-orient: vertical;
+
+      &.showAll {
+        overflow: auto;
+        text-overflow: unset;
+        display: -webkit-box;
+        -webkit-line-clamp: unset; /* number of lines to show */
+        line-clamp: unset;
+        -webkit-box-orient: vertical;
+      }
+    }
+
+    .actionsWrapper {
+      display: flex;
+      align-items: center;
+      .action {
+        margin-right: 2rem;
+        min-height: 5.5rem;
+        padding: 1rem 3rem;
+        font-size: 2rem;
+        font-weight: 500;
+
+        i {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}

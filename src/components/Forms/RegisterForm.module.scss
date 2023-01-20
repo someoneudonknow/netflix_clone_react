@@ -1,0 +1,105 @@
+.loginForm {
+  width: 50rem;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+  }
+
+  .formText {
+    margin-top: 10rem;
+
+    & p:nth-child(1) {
+      .loadmoreBtn {
+        font-size: 1.5rem;
+      }
+      font-size: 1.5rem;
+      color: #8c7c56;
+    }
+
+    &.showInfoText {
+      .infoText {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    .infoText {
+      transition: all ease 0.2s;
+      font-size: 1.5rem;
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  .loginBtn {
+    height: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .formControl {
+    width: 100%;
+    height: 6rem;
+    position: relative;
+    margin-bottom: 5rem;
+    display: flex;
+
+    .showHideBtn {
+      width: 7rem;
+      outline: none;
+      border: none;
+      text-align: center;
+      background: #434242;
+    }
+
+    &.invalid .errorMessage {
+      display: block;
+    }
+
+    &.focusInput {
+      label {
+        font-size: 1.4rem;
+        transform: translateY(0);
+      }
+    }
+
+    .errorMessage {
+      color: #E87C05;
+      font-size: 1.5rem;
+      display: none;
+      width: 100%;
+      position: absolute;
+      top: 100%;
+    }
+
+    input {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      outline: none;
+      border: none;
+      font-size: 1.8rem;
+      padding: 2.3rem 2rem 0 2rem;
+    }
+
+    label {
+      transition: all ease-in 0.1s;
+      position: absolute;
+      font-size: 1.9rem;
+      transform: translateY(0.7rem);
+      top: 1rem;
+      left: 2rem;
+      color: var(--white-color);
+    }
+  }
+}
+
+.linkBtn {
+  color: #1155eb;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

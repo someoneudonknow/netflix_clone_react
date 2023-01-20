@@ -1,0 +1,119 @@
+.modalContainer {
+  transform-origin: center;
+  box-shadow: 0 0 1rem 1rem rgba(255, 255, 255, 0.01);
+  animation: appear ease 0.4s;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 90rem;
+  transition: all ease 0.4s;
+  margin-bottom: 3rem;
+
+  &.out {
+    transform: scale(0.5);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .modalBody {
+    .description {
+      color: var(--white-color);
+      display: flex;
+
+      .descLeft {
+        font-weight: 500;
+        width: 70%;
+        padding-right: 3.5rem;
+
+        .yearAndAge {
+          margin-bottom: 2rem;
+
+          .year {
+            font-size: 1.7rem;
+            margin-right: 2rem;
+          }
+
+          .adult {
+            padding: 0.2rem 1rem;
+            font-size: 1.7rem;
+            border: 1px solid white;
+          }
+        }
+
+        .overview {
+          font-size: 1.7rem;
+        }
+      }
+
+      .descRight {
+        width: 30%;
+
+        .actorList,
+        .genresList,
+        title {
+          display: inline-block;
+          color: var(--white-color);
+          font-size: 1.7rem;
+        }
+
+        .actorList,
+        .genresList {
+          span,
+          i {
+            list-style-type: none;
+            display: inline-block;
+
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .title {
+          color: #777777;
+          font-size: 1.6rem;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .modalFooter {
+    padding: 5rem 6rem 3.3rem 6rem;
+    background-color: #181818;
+    color: var(--white-color);
+    text-align: left;
+    display: block;
+    font-weight: 400;
+    z-index: 100;
+    .about {
+      font-weight: normal;
+      font-size: 3.3rem;
+      .footerMovieName {
+        font-weight: 600;
+      }
+    }
+
+    .footerContent {
+      text-align: left;
+      font-size: 1.6rem;
+
+      .roleTitle {
+        font-weight: normal;
+        font-size: 1.6rem;
+        color: #777777;
+      }
+
+      p {
+        display: inline-block;
+
+        span {
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

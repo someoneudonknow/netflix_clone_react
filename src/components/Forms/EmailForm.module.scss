@@ -1,0 +1,79 @@
+.myForm{
+  display: inline-block;
+}
+
+.formControl {
+  height: 8rem;
+  display: flex;
+  align-items: center;
+
+  .inputWrapper,
+  button {
+    height: 100%;
+  }
+
+  button {
+    $borderRad: 0.3rem;
+    background-color: var(--primary-red);
+    font-size: 3rem;
+    padding: 2rem 3rem;
+    color: var(--white-color);
+    border: none;
+    outline: none;
+    border-top-right-radius: $borderRad;
+    border-bottom-right-radius: $borderRad;
+
+    &,
+    i {
+      transition: all ease 0.3s;
+    }
+
+    &:hover {
+      background-color: var(--lighter-primary-red);
+      cursor: pointer;
+      i {
+        transform: translateX(1rem);
+      }
+    }
+
+    span {
+      margin-right: 1rem;
+    }
+  }
+  .inputWrapper {
+    background-color: var(--white-color);
+    padding: 1rem;
+    min-width: 60rem;
+    position: relative;
+
+    input,
+    label {
+      display: block;
+    }
+
+    label {
+      transition: all ease 0.2s;
+      color: var(--primary-text);
+    }
+
+    input {
+      width: 90%;
+      height: 100%;
+      float: right;
+      font-size: 1.7rem;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      position: absolute;
+      top: 60%;
+      transform: translateY(-50%);
+      padding: 1rem 0;
+    }
+  }
+}
+
+.errorMessage {
+  margin-top: 0.3rem;
+  font-size: 1.7rem;
+  color: #FF9104;
+}

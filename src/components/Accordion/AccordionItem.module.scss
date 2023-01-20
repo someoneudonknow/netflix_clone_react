@@ -1,0 +1,44 @@
+.accbar{
+    font-size: 3rem;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .barTittle{
+        padding: 2.5rem 2.5rem;
+        background-color: #303030;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border: none;
+        outline: none;
+        font-size: 2.5rem;
+        color: var(--white-color);
+
+        cursor: pointer;
+        i{
+            font-size: 3rem;
+            font-weight: normal;
+            transition: all ease .3s;
+        }
+        .title{
+            font-size: 2.5rem;
+            font-weight: normal;
+        }
+    }
+
+    .content{
+        margin-top: 0.1rem;
+        overflow: hidden;
+        background-color: #303030;
+        height: 0;
+        transition: all ease .3s;
+        font-size: none;
+  
+        &.active {
+            font-size: inherit;
+            height: auto;
+            padding: 2.5rem 2.5rem;
+        }
+    }
+}

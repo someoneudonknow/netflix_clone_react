@@ -1,0 +1,22 @@
+.footerWrapper {
+  width: 100%;
+  background-color: #000000;
+  a {
+    color: var(--primary-text);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .footerContent {
+    padding: 7rem 4.5rem 2rem 4.5rem;
+    width: 120rem;
+    margin: auto;
+
+    .title {
+      font-size: 2rem;
+    }
+  }
+}
