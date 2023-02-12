@@ -8,6 +8,7 @@ const usePlayTV = () => {
     const modalInfo = {
       isModalOpen: true,
       id: id,
+      type: "tv"
     }
     setModalInfo(modalInfo);
     navigate(`/vn/watch?isMovie=false&id=${id}&s=${season}&e=${episode}`);

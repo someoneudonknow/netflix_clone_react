@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const wishListSlice = createSlice({
     name: 'wishList',
     initialState: {
-        currentUserWishList: JSON.parse(localStorage.getItem("wishList")) || [],
+        currentUserWishList: [],
         changed: false,
     },
     reducers: {
@@ -17,7 +17,6 @@ const wishListSlice = createSlice({
         },
         removeFromWishList: (state, {payload}) => {
             const filmId = payload.id;
-
             state.currentUserWishList = state.currentUserWishList.filter((movie) => {
                 return movie.id !== filmId;
             })

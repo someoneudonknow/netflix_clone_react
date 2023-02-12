@@ -1,10 +1,16 @@
 import "./App.scss";
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Loading } from "../components/UI";
 import { LoginForm, RegisterForm } from "../components/Forms";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import { AuthContext } from "../store/Auth/AuthProvider";
+import { getWishList, updateList } from "../store/wishListActions";
+import { getGenresList } from "../store/movieActions";
+import { MainLayout } from "../components/layout";
 
+const SearchPage = lazy(() => import("./SearchPage"));
 const WelcomePage = lazy(() => import("./Welcome"));
 const HomePage = lazy(() => import("./Home"));
 const LoginSignUpPage = lazy(() => import("./Login_SignUp"));
@@ -14,56 +20,94 @@ const TrendingPage = lazy(() => import("./TrendingPage"));
 const MyListPage = lazy(() => import("./MyListPage"));
 
 function App() {
+  const wishList = useSelector((state) => state.wishList.currentUserWishList);
+  const isChanged = useSelector((state) => state.wishList.changed);
+  const ctx = useContext(AuthContext);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isChanged) {
+      dispatch(updateList(wishList, ctx.currentUser.uid));
+    }
+  }, [wishList, isChanged]);
+
+  useEffect(() => {
+    dispatch(getGenresList());
+  }, []);
+
+  useEffect(() => {
+    if (ctx?.currentUser?.uid) {
+      dispatch(getWishList(ctx.currentUser.uid));
+    }
+  }, [ctx, ctx?.currentUser?.uid]);
+
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/vn" />} />
-        <Route path="/vn" element={<WelcomePage />} />
+        <Route path="/" element={<Navigate replace to="/vn/welcome" />} />
+        <Route path="/vn/welcome" element={<WelcomePage />} />
         <Route path="/vn/login_register" element={<LoginSignUpPage />}>
           <Route path="login" element={<LoginForm />} />
           <Route path="register" element={<RegisterForm />} />
         </Route>
         <Route
-          path="/vn/home/:userId"
+          path="/vn"
           element={
             <PrivateRoute>
-              <HomePage />
+              <MainLayout />
             </PrivateRoute>
           }
-        />
+        >
+          <Route
+            path="home/:userId"
+            element={
+              <PrivateRoute>
+                <HomePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="TVShow"
+            element={
+              <PrivateRoute>
+                <TVShowsPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="trending"
+            element={
+              <PrivateRoute>
+                <TrendingPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="myList"
+            element={
+              <PrivateRoute>
+                <MyListPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="search"
+            element={
+              <PrivateRoute>
+                <SearchPage />
+              </PrivateRoute>
+            }
+          />
+        </Route>
         <Route
-          path="/vn/TVShow"
-          element={
-            <PrivateRoute>
-              <TVShowsPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/vn/watch"
-          element={
-            <PrivateRoute>
-              <WatchPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/vn/trending"
-          element={
-            <PrivateRoute>
-              <TrendingPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/vn/myList"
-          element={
-            <PrivateRoute>
-              <MyListPage />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/*" element={<Navigate replace to="/vn" />} />
+            path="/vn/watch"
+            element={
+              <PrivateRoute>
+                <WatchPage />
+              </PrivateRoute>
+            }
+          />
+        <Route path="/*" element={<Navigate replace to="/vn/welcome" />} />
       </Routes>
     </Suspense>
   );

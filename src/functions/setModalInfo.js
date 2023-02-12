@@ -7,6 +7,7 @@ const setModalInfo = (info) => {
         document.documentElement.scrollTop || document.body.scrollTop
       )
     );
+    window.sessionStorage.setItem("type", info.type);
 }
 
 export default setModalInfo;

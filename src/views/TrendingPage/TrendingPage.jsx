@@ -1,8 +1,7 @@
 import { PageSkeletonLoading } from "../../components/UI";
 import React, { Suspense, lazy, useState, useEffect } from "react";
-import { usePlayMovie } from "../../hooks";
-import { MovieModal } from "../../components/Modal";
-import { getModalInfo } from "../../functions";
+import { MovieModal, TVShowModal } from "../../components/Modal";
+import { getModalInfo, removeModalInfo } from "../../functions";
 import { getTrending } from "../../utils/api";
 import MovieCardSlider, {
   MovieSliderSkeleton,
@@ -12,9 +11,9 @@ import classes from "./TrendingPage.module.scss";
 const MainLayout = lazy(() => import("../../components/layout/MainLayout"));
 
 const TrendingPage = () => {
-  const playMovie = usePlayMovie();
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const [id, setId] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [id, setId] = useState();
+  const [type, setType] = useState(null);
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [trendingTVs, setTrendingTVs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,24 +42,32 @@ const TrendingPage = () => {
     getData();
   }, []);
 
-  // useEffect(() => {
-  //   const data = getModalInfo();
+  useEffect(() => {
+    const data = getModalInfo();
 
-  //   if (data?.isModalOpen && data?.id) {
-  //     setModalOpen(data?.isModalOpen);
-  //     setId(data?.id);
-  //     document.documentElement.scrollTop = document.body.scrollTop =
-  //       data?.scrollTop || 0;
-  //   }
-  // }, []);
+    if (data?.isModalOpen && data?.id) {
+      setModalOpen(data?.isModalOpen);
+      setId(data?.id);
+      setType(data?.type);
+      document.documentElement.scrollTop = document.body.scrollTop =
+        data?.scrollTop || 0;
 
-  // const handleHideModal = () => {
-  //   setModalOpen(false);
-  // };
+      removeModalInfo();
+    }
+  }, []);
+
+  const handleHideModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <Suspense fallback={<PageSkeletonLoading />}>
-      <MainLayout>
+      <>
+        {modalOpen && type && type === "movie" ? (
+          <MovieModal onHide={handleHideModal} id={id} isShow={modalOpen} />
+        ) : (
+          <TVShowModal onHide={handleHideModal} id={id} isShow={modalOpen} />
+        )}
         <div className={classes.content}>
           {isLoading && (
             <>
@@ -82,7 +89,7 @@ const TrendingPage = () => {
             </>
           )}
         </div>
-      </MainLayout>
+      </>
     </Suspense>
   );
 };

@@ -1,4 +1,5 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useRef } from "react";
+import { useSelector } from "react-redux";
 import classes from "./MovieCard.module.scss";
 import image from "../../assets/images/Poster Not Available.jpg";
 import { RoundedButton } from ".././UI";
@@ -20,8 +21,12 @@ const MovieCard = ({
   const playMovie = usePlayMovie();
   const playTV = usePlayTV();
   const { addToList, isInWishList } = useWishList(id);
-  let timerId;
-
+  const genresList = useSelector((state) => state.movie.genresInfo);
+  const transformedGenresList = genres?.map((genresItem, i) => {
+    return genresList?.genres?.find(d => d.id === genresItem);
+  }, [genresList])
+  let timerId = useRef();
+  
   const handleHideModal = () => {
     setShowModal(false);
   };
@@ -55,15 +60,15 @@ const MovieCard = ({
   };
 
   const handleMouseEnter = () => {
-    timerId = setTimeout(() => {
+    timerId.current = setTimeout(() => {
       setIsHovered(true);
     }, 600);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    if (timerId) {
-      clearTimeout(timerId);
+    if (timerId.current) {
+      clearTimeout(timerId.current);
     }
   };
 
@@ -111,9 +116,9 @@ const MovieCard = ({
           </div>
           <h3 className={classes.cardMovieName}>{movieName}</h3>
           <ul className={classes.genresList}>
-            {genres?.slice(0, 3).map((genre) => (
-              <li key={genre} className={classes.genre}>
-                {genre}
+            {transformedGenresList?.slice(0, 3).map((genre) => (
+              <li key={genre?.id} className={classes.genre}>
+                {genre?.name}
               </li>
             ))}
           </ul>

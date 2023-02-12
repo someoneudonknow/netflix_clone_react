@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { Button, ButtonGroup, Alert, Spinner } from "react-bootstrap";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { addDoc } from "firebase/firestore";
+import { addDoc, setDoc, doc } from "firebase/firestore";
 import classes from "./LoginForm.module.scss";
 import { FormWrapper } from "../UI";
-import { auth, fbProvider, ggProvider } from "../../firebase/config";
+import { auth, fbProvider, ggProvider, db } from "../../firebase/config";
 import { usersRef } from "../../firebase/config";
 
 const LoginForm = () => {
@@ -106,10 +106,10 @@ const LoginForm = () => {
       const { user } = credentialUser;
       setIsError(null);
       if (credentialUser._tokenResponse?.isNewUser) {
-        const docRef = await addDoc(usersRef, {
+        const docRef = await setDoc(doc(db, "users", `${user.uid}`), {
           displayName: user?.displayName,
           email: user.email,
-          photoUrl: user.photoURL,
+          photoUrl: user?.photoURL,
           uid: user.uid,
           providerId: user.providerData[0].providerId,
           wishList: [],
@@ -147,12 +147,13 @@ const LoginForm = () => {
       const credentialUser = await signInWithPopup(auth, ggProvider);
       const { user } = credentialUser;
       if (credentialUser._tokenResponse?.isNewUser) {
-        const docRef = await addDoc(usersRef, {
+        const docRef = await setDoc(doc(db, "users", `${user.uid}`), {
           displayName: user?.displayName,
           email: user.email,
-          photoUrl: user.photoURL,
+          photoUrl: user?.photoURL,
           uid: user.uid,
           providerId: user.providerData[0].providerId,
+          wishList: [],
         });
       }
       navigate("/vn/home/" + credentialUser.user.uid);

@@ -176,11 +176,13 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                 movieList={collection}
               />
             )}
-            <MovieList
-              type="movie"
-              title="More Like This"
-              movieList={similarMovies}
-            />
+            {similarMovies.length > 0 && (
+              <MovieList
+                type="movie"
+                title="More Like This"
+                movieList={similarMovies}
+              />
+            )}
           </ModalBodyWrapper>
           <footer id="Modalfooter" className={classes.modalFooter}>
             <p className={classes.about}>

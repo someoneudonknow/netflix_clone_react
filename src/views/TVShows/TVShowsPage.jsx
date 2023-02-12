@@ -43,10 +43,8 @@ const TVShowsPage = () => {
   return (
     <Suspense fallback={<PageSkeletonLoading />}>
       <TVShowModal onHide={handleHideModal} id={id} isShow={modalOpen} />
-      <MainLayout>
-        <MainHeader onPlay={handlePlayTV} type="tv" />
-        <TVShowsMain />
-      </MainLayout>
+      <MainHeader onPlay={handlePlayTV} type="tv" />
+      <TVShowsMain />
     </Suspense>
   );
 };

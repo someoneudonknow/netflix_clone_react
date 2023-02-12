@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { useEffect, useContext } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 import classes from "./WatchPage.module.scss";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../store/Auth/AuthProvider";
 import Skeleton from "react-loading-skeleton";
 
 const WatchPageSkeleton = () => {
@@ -22,10 +21,8 @@ const WatchPageSkeleton = () => {
 const WatchPage = () => {
   const [isLoading, setIsLoading] = useState();
   const [searchParams] = useSearchParams();
-  const { currentUser } = useContext(AuthContext);
   const isMovie = searchParams.get("isMovie");
   let url;
-  console.log({ isMovie });
   const navigate = useNavigate();
 
   if (isMovie === "true") {
@@ -54,7 +51,6 @@ const WatchPage = () => {
     navigate(-1);
   };
 
-  console.log(url)
   return (
     <>
       {isLoading && <WatchPageSkeleton />}

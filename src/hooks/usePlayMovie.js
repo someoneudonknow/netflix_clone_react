@@ -7,7 +7,8 @@ const usePlayMovie = () => {
   const playMovie = (id) => {
     const modalInfo = {
       isModalOpen: true,
-      id: id
+      id: id,
+      type: "movie"
     }
     setModalInfo(modalInfo);
     navigate(`/vn/watch?isMovie=true&id=${id}`);

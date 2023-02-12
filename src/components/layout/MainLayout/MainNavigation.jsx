@@ -2,28 +2,29 @@ import React, { useContext, useEffect } from "react";
 import classes from "./MainNavigation.module.scss";
 import demoImage from "../../../assets/images/demoNotifiImage.png";
 import { NavLink, Link } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Wrapper } from "../../UI";
 import avatar from "../../../assets/images/avatar_demo.png";
 import logo from "../../../assets/images/netflix_logo.png";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../store/Auth/AuthProvider";
 import { auth } from "../../../firebase/config";
+import SearchBox from "./SearchBox";
 // TODO: split this file into separate.
 
 const DUMMY_NOTIFICATIONS = [
-  // {
-  //   id: "n1",
-  //   title: "Ra mắt vào ngày 6 tháng 11 Phát trailer",
-  //   time: "Hôm nay",
-  //   image: demoImage,
-  // },
-  // {
-  //   id: "n2",
-  //   title: "Ra mắt vào ngày 6 tháng 11 Phát trailer",
-  //   time: "Hôm nay",
-  //   image: demoImage,
-  // },
+  {
+    id: "n1",
+    title: "Ra mắt vào ngày 6 tháng 11 Phát trailer",
+    time: "Hôm nay",
+    image: demoImage,
+  },
+  {
+    id: "n2",
+    title: "Ra mắt vào ngày 6 tháng 11 Phát trailer",
+    time: "Hôm nay",
+    image: demoImage,
+  },
 ];
 
 const NotificationItem = ({ title, time, image }) => {
@@ -55,7 +56,7 @@ const NotificationList = ({ notifications }) => {
   );
 };
 
-const AvatarDropdown = ({userName, userAvatar}) => {
+const AvatarDropdown = ({ userName, userAvatar }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -63,7 +64,7 @@ const AvatarDropdown = ({userName, userAvatar}) => {
       auth.signOut();
       navigate("/vn/login_register/login", { replace: true });
     } catch (error) {
-      console.error(error?.message)
+      console.error(error?.message);
     }
   };
 
@@ -73,7 +74,9 @@ const AvatarDropdown = ({userName, userAvatar}) => {
         <li>
           <img src={userAvatar} alt="avatar" />
           <a href="#">
-            <p className="text-truncate" style={{maxWidth: "14rem"}}>{userName}</p>
+            <p className="text-truncate" style={{ maxWidth: "14rem" }}>
+              {userName}
+            </p>
           </a>
         </li>
         <li>
@@ -97,13 +100,9 @@ const AvatarDropdown = ({userName, userAvatar}) => {
 };
 
 const MainNavigation = () => {
-  const [toggleSearchBox, setToggleSearchBox] = useState(false);
-  const [enteredSearchBox, setEnteredSearchBox] = useState("");
   const [isAvatarHover, setIsAvatarHover] = useState(false);
   const [showNavBackground, setShowNavBackground] = useState(false);
-  const inputRef = useRef();
-  const isEntered = enteredSearchBox.trim() != "";
-  const {currentUser} = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
 
   const userId = currentUser.uid;
   const userName = currentUser.displayName || currentUser.email;
@@ -111,42 +110,21 @@ const MainNavigation = () => {
 
   useEffect(() => {
     const handleShowBackground = () => {
-      if(document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
         setShowNavBackground(true);
-      }else{
+      } else {
         setShowNavBackground(false);
       }
-    }
-    window.addEventListener('scroll', handleShowBackground)
-  
+    };
+    window.addEventListener("scroll", handleShowBackground);
+
     return () => {
-      window.removeEventListener('scroll', handleShowBackground)
-    }
-  }, [setShowNavBackground, document.body.scrollTop])
-  
-
-  const handleSearchBoxClick = () => {
-    setToggleSearchBox((prevState) => !prevState);
-  };
-
-  const handleSearchBoxInput = (e) => {
-    setEnteredSearchBox(e.target.value);
-  };
-
-  const handleInputBlur = () => {
-    if (!isEntered) {
-      setToggleSearchBox(false);
-    }
-  };
-
-  const handleCancelClick = () => {
-    if (isEntered) {
-      setEnteredSearchBox("");
-      inputRef.current.focus();
-    } else {
-      setToggleSearchBox((prevState) => !prevState);
-    }
-  };
+      window.removeEventListener("scroll", handleShowBackground);
+    };
+  }, [setShowNavBackground, document.body.scrollTop]);
 
   const handleMouseEnter = () => {
     setIsAvatarHover(true);
@@ -158,7 +136,11 @@ const MainNavigation = () => {
 
   return (
     <header>
-      <div className={`${classes.container} ${showNavBackground ? classes.showBackground : ""}`}>
+      <div
+        className={`${classes.container} ${
+          showNavBackground ? classes.showBackground : ""
+        }`}
+      >
         <Wrapper>
           <nav>
             <ul className={classes.firstList}>
@@ -210,36 +192,12 @@ const MainNavigation = () => {
             </ul>
             <ul className={classes.secondList}>
               <li>
-                <div
-                  className={`${classes.searchBox} ${
-                    toggleSearchBox ? classes.searchActive : ""
-                  }`}
-                >
-                  <button onClick={handleSearchBoxClick}>
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                  <div className={classes.inputField}>
-                    {toggleSearchBox && (
-                      <input
-                        ref={inputRef}
-                        onChange={handleSearchBoxInput}
-                        onBlur={handleInputBlur}
-                        value={enteredSearchBox}
-                        type="text"
-                        placeholder="Titles, people, genres,..."
-                        autoFocus
-                      />
-                    )}
-                    {toggleSearchBox && (
-                      <button onClick={handleCancelClick}>
-                        {isEntered && <i className="fa-solid fa-xmark"></i>}
-                      </button>
-                    )}
-                  </div>
-                </div>
+                <SearchBox />
               </li>
               <li>
-                <p className="text-truncate" style={{maxWidth: "14rem"}}>{userName}</p>
+                <p className="text-truncate" style={{ maxWidth: "14rem" }}>
+                  {userName}
+                </p>
               </li>
               <li className={classes.notification}>
                 <i className="fa-solid fa-bell"></i>
@@ -253,7 +211,7 @@ const MainNavigation = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <div className={classes.avatar}>
-                  <img src={(avatarSrc || avatar)} alt="user avatar" />
+                  <img src={avatarSrc || avatar} alt="user avatar" />
                   <i
                     style={
                       isAvatarHover
@@ -263,7 +221,9 @@ const MainNavigation = () => {
                     className="fa-solid fa-caret-up"
                   ></i>
                 </div>
-                {isAvatarHover && <AvatarDropdown userName={userName} userAvatar={avatarSrc}/>}
+                {isAvatarHover && (
+                  <AvatarDropdown userName={userName} userAvatar={avatarSrc} />
+                )}
               </li>
             </ul>
           </nav>

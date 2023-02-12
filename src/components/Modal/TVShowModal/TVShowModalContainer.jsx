@@ -197,11 +197,13 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
               />
             )}
             {isEpisodesLoading && <EpisodesListSkeleton />}
-            <MovieList
-              type="tv"
-              title="More Like This"
-              movieList={similarSeries}
-            />
+            {similarSeries.length > 0 && (
+              <MovieList
+                type="tv"
+                title="More Like This"
+                movieList={similarSeries}
+              />
+            )}
           </ModalBodyWrapper>
           <footer id="Modalfooter" className={classes.modalFooter}>
             <p className={classes.about}>

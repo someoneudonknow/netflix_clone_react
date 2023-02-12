@@ -15,7 +15,6 @@ const ModalHeader = ({
   isAdd,
   type
 }) => {
-  console.log(posterURL)
   return (
     <BackgroundVideo className={classes.container} src={posterURL ? `${process.env.REACT_APP_BASE_IMAGE_780_URL}${posterURL}` : defaultImage}>
       <RoundedButton className={classes.closeBtn} onClick={onHide}>

@@ -1,0 +1,19 @@
+.searchPage {
+    background-color: var(--primary-black);
+    padding: 10rem 6rem 0 6rem;
+    min-height: 100vh;
+    
+    .movieCardWrapper {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+      list-style: none;
+      padding-top: 5rem;
+    
+      .movieCard {
+        margin: 0 -3.5rem;
+      }
+    }
+}
+

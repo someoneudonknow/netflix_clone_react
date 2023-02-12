@@ -1,7 +1,11 @@
 header {
   .container {
     background-color: transparent;
-    background-image: linear-gradient(180deg,rgba(0,0,0,.7) 10%,transparent);
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.7) 10%,
+      transparent
+    );
     height: 7rem;
     position: fixed;
     top: 0;
@@ -183,70 +187,6 @@ header {
                   text-decoration: underline;
                 }
               }
-            }
-          }
-        }
-
-        .searchBox {
-          padding: 0.5rem;
-          background-color: rgba(0, 0, 0, 0.05);
-          display: flex;
-          width: 30px;
-          align-items: center;
-
-          &.searchActive {
-            border: 0.1rem solid #fff;
-            width: auto;
-
-            .inputField {
-              width: 250px;
-            }
-          }
-          .inputField {
-            transition: all 0.7s ease;
-            width: 0;
-            position: relative;
-
-            input {
-              transition: all 0.7s ease;
-              color: #fff;
-              font-size: 17px;
-              outline: none;
-              background: transparent;
-              border: none;
-              width: 77%;
-            }
-
-            button {
-              height: 100%;
-              width: 3rem;
-              display: inline-block;
-              background-color: transparent;
-              position: absolute;
-              right: 0rem;
-              top: 0;
-              height: 110%;
-              width: 5rem;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              margin: 0;
-              border: none;
-              outline: none;
-            }
-          }
-
-          button {
-            background-color: transparent;
-            margin-right: 1rem;
-            border: none;
-            outline: none;
-            transition: all 1s ease;
-            cursor: pointer;
-            i {
-              color: #fff;
-              font-size: 2.5rem;
-              font-weight: bold;
             }
           }
         }

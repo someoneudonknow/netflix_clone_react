@@ -7,24 +7,22 @@ const MyList = () => {
   const wishList = useSelector((state) => {
     return state.wishList.currentUserWishList;
   });
+
   return (
     <>
-      {wishList.length > 0 && (
-        <div className={classes.list}>
-          {wishList?.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                posterURL={movie.posterURL}
-                movieName={movie.name}
-                genres={movie.genres}
-                id={movie.id}
-                type={movie.type}
-                className={classes.movieCard}
-              />
-        
-          ))}
-        </div>
-      )}
+      <div className={classes.list}>
+        {wishList?.map((movie) => (
+          <MovieCard
+            key={movie.id}
+            posterURL={movie.posterURL}
+            movieName={movie.name}
+            genres={movie.genres}
+            id={movie.id}
+            type={movie.type}
+            className={classes.movieCard}
+          />
+        ))}
+      </div>
     </>
   );
 };

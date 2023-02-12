@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { createContext, useState, useEffect } from "react";
 import { auth } from "../../firebase/config";
-import { type } from "@testing-library/user-event/dist/type";
 
 export const AuthContext = createContext({
   currentUser: null,

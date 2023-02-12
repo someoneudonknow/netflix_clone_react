@@ -14,7 +14,6 @@ const HomeMain = () => {
   const observer = useRef(
     new IntersectionObserver((entries) => {
       const first = entries[0];
-      console.log(entries)
       if (first.isIntersecting) {
         setPageNum((no) => no + 3);
       }

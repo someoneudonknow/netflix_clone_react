@@ -104,7 +104,6 @@ const RegisterForm = () => {
         password
       );
       const { user } = credentialUser;
-      
       const docRef = await setDoc(doc(db, "users", `${user.uid}`), {
         displayName: user?.displayName,
         email: user.email,

@@ -1,6 +1,14 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getGenres } from "../utils/api";
+import { replaceGenres } from "./movieSlice"
+import { getGenres } from "../utils/api"
 
-const getGenresInfo = createAsyncThunk('movie/getGenresInfo', async () => {
-    // const genres
-})
+export const getGenresList = () => {
+    return async (dispatch) => {
+        try {
+            const genresList = await getGenres();
+            dispatch(replaceGenres(genresList));
+        }catch (e) {
+            console.log(e)
+        }
+    }
+}
+

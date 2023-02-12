@@ -1,3 +1,5 @@
+import defaultImg from "../assets/images/Poster Not Available.jpg"
+
 const checkIsRelease = (releaseDate) => {
   const releaseTime = new Date(releaseDate).getTime();
   const now = Date.now();
@@ -269,4 +271,26 @@ export const getEpisodesByIdAndNumber = async (id, number) => {
   });
 
   return transformedData;
+};
+
+export const getSearchResults = async (q, page = 1, adult = false) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/search/multi?api_key=${
+      process.env.REACT_APP_API_KEY
+    }&query=${encodeURIComponent(q)}&page=${page}&include_adult=${!!adult}`
+  );
+
+  const results = await response.json();
+
+  const transformedResults = results?.results.map((d) => {
+    return {
+      posterURL: d.backdrop_path || d.poster_path || defaultImg,
+      movieName: d.name || d.title,
+      genres: d.genre_ids || [],
+      id: d.id,
+      type: d.media_type,
+    };
+  });
+
+  return transformedResults;
 };

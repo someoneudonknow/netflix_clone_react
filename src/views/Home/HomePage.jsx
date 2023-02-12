@@ -15,7 +15,6 @@ const HomePage = () => {
 
   useEffect(() => {
     window.sessionStorage.setItem("currentPage", JSON.stringify("home"));
-
     return () => {
       window.sessionStorage.removeItem("currentPage");
     };
@@ -44,10 +43,8 @@ const HomePage = () => {
   return (
     <Suspense fallback={<PageSkeletonLoading />}>
       <MovieModal onHide={handleHideModal} id={id} isShow={modalOpen} />
-      <MainLayout>
-        <MainHeader onPlay={handlePlayMovie} type="movie" />
-        <Main />
-      </MainLayout>
+      <MainHeader onPlay={handlePlayMovie} type="movie" />
+      <Main />
     </Suspense>
   );
 };
