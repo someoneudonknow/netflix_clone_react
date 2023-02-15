@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary-black-2);
+  min-height: 100vh;
+
+  .mainContent {
+    margin-top: 8rem;
+    width: 65rem;
+    h1 {
+      font-weight: 500;
+      font-size: 6rem;
+      color: var(--white-color);
+    }
+    hr {
+      height: 0.2rem;
+      background-color: var(--primary-text);
+    }
+
+    .editProfileForm {
+      width: 100%;
+      margin-top: 2.2rem;
+      
+      .wrapper {
+        position: relative;
+        display: flex;
+
+        .rigthPart {
+          flex: 1;
+          .formControl {
+            margin-bottom: 2.2rem;
+
+            &.invalid {
+              input {
+                border: 0.2rem solid var(--primary-red);
+              }
+            }
+
+            .invalidText {
+              color: var(--primary-red);
+              font-size: 1.7rem;
+            }
+
+            input {
+              width: 100%;
+              outline: none;
+              border: none;
+              padding: 0.8rem 1.2rem;
+              font-size: 2rem;
+              background-color: var(--gray-input);
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    .actions {
+      margin-top: 3.5rem;
+
+      .action {
+        font-size: 2rem;
+        font-weight: 600;
+        padding: 0.8rem 2rem;
+        margin-right: 2rem;
+        transition: all ease 0.1s;
+
+        &:disabled, &[disabled] {
+          opacity: 0.9;
+        }
+      }
+
+      .saveBtn {
+        &:not(:disabled):hover {
+          background-color: var(--primary-red);
+          color: white;
+        }
+      }
+
+      .cancelBtn {
+        background-color: transparent;
+        border: 0.1rem solid var(--gray-input);
+        color: var(--gray-input);
+
+        &:hover {
+          border: 0.1rem solid white;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  background-color: rgba($color: black, $alpha: 0.2);
+  height: 100%;
+  width: 100%;
+  z-index: var(--layer-1);
+  top: 0;
+  left: 0;
+
+  div {
+    $size: 4rem;
+    height: $size;
+    width: $size;
+
+  }
+}

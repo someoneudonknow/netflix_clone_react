@@ -81,7 +81,7 @@ const AvatarDropdown = ({ userName, userAvatar }) => {
         </li>
         <li>
           <i className="fa-regular fa-pen-to-square"></i>
-          <a href="#">Manage Profiles</a>
+          <Link to="/vn/profile">Manage Profiles</Link>
         </li>
         <li>
           <i className="fa-regular fa-user"></i>

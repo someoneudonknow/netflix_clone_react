@@ -15,7 +15,7 @@ const MyList = () => {
           <MovieCard
             key={movie.id}
             posterURL={movie.posterURL}
-            movieName={movie.name}
+            movieName={movie.movieName}
             genres={movie.genres}
             id={movie.id}
             type={movie.type}

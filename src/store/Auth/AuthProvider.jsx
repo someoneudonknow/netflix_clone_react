@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
+        console.log({"login": auth.currentUser});
         const currentPage = JSON.parse(
           window.sessionStorage.getItem("currentPage")
         );
@@ -32,6 +33,9 @@ const AuthProvider = ({ children }) => {
               break;
             case "myList":
               navigate("/vn/myList");
+              break;
+            case "profile":
+              navigate("/vn/profile");
               break;
             default:
               navigate("/vn/home/" + user.uid);

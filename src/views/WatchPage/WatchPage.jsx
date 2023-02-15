@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
-import classes from "./WatchPage.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addModal, removeModal } from "../../store/modalSlice";
+import classes from "./WatchPage.module.scss";
 import Skeleton from "react-loading-skeleton";
 
 const WatchPageSkeleton = () => {
@@ -24,6 +25,7 @@ const WatchPage = () => {
   const isMovie = searchParams.get("isMovie");
   let url;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   if (isMovie === "true") {
     const movieId = searchParams.get("id");
@@ -37,6 +39,7 @@ const WatchPage = () => {
   }
 
   useEffect(() => {
+    dispatch(removeModal({id: Number(searchParams.get("id"))}))
     setIsLoading(true);
     const timeout = setTimeout(() => {
       setIsLoading(false);
@@ -44,6 +47,11 @@ const WatchPage = () => {
 
     return () => {
       clearTimeout(timeout);
+      if (isMovie === "true") {
+        dispatch(addModal({ id: Number(searchParams.get("id")), type: "movie" }));
+      } else {
+        dispatch(addModal({ id: Number(searchParams.get("id")), type: "tv" }));
+      }
     };
   }, []);
 

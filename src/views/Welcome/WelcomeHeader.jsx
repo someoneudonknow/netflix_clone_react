@@ -14,7 +14,6 @@ const WelcomeHeader = () => {
   };
 
   const handleSubcribes = (value) => {
-    //...post email value here
     navigate("/vn/login_register/login", {
       state: {email: value?.toString()}
     });

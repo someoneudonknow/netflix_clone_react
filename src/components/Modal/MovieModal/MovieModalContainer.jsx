@@ -1,4 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
+import { useDispatch } from "react-redux";
+import { addModal, removeModal } from "../../../store/modalSlice";
 import classes from "./MovieModalContainer.module.scss";
 import ModalHeader from "../ModalHeader";
 import {
@@ -12,7 +14,6 @@ import { usePlayMovie, useWishList } from "../../../hooks";
 import { ModalWrapper } from "../../UI";
 import ModalBodyWrapper from "../ModalBodyWrapper";
 import ModalSkeleton from "../ModalSkeleton/ModalSkeleton";
-import { CheckSVG, PlusSVG } from "../../SVG";
 
 const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +27,6 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   const [isFromCollection, setIsFromCollection] = useState();
   const collectionId = isFromCollection?.id;
   //............................
-
   const releaseDate = currentMovie?.release_date;
   const releaseYear = releaseDate?.substring(-1, releaseDate?.indexOf("-"));
   const isAdult = currentMovie?.adult;
@@ -43,6 +43,15 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
 
   const { addToList, isInWishList } = useWishList(id);
   const playMovie = usePlayMovie();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(addModal({ id, type: "movie" }));
+
+    return () => {
+      dispatch(removeModal({ id }));
+    };
+  }, []);
 
   useEffect(() => {
     (async () => {

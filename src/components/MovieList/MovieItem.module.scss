@@ -3,7 +3,7 @@
   color: var(--white-color);
   position: relative;
   transition: all linear .3s;
-  height: 36rem;
+  height: 36rem !important;
   
   .cardImage{
     height: 15rem;
@@ -46,9 +46,15 @@
 
   .cardBody {
     padding: 1.8rem 1.4rem;
-    .year {
+    
+    .filmName {
       font-size: 1.8rem;
       max-width: 80%;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .cardText {

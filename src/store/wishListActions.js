@@ -22,7 +22,7 @@ export const updateList = (wishList, docId) => {
       const data = {
         wishList,
       };
-      const docR = await updateDoc(docRef, data);
+      await updateDoc(docRef, data);
     } catch (e) {
       console.error(e);
     }

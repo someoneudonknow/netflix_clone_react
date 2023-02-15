@@ -19,11 +19,11 @@ const MovieList = ({
   const playTV = usePlayTV();
 
   const handlePlayMovie = (id) => {
-    playMovie(id);
-  };
-
-  const handlePlayTV = (id, season, episode) => {
-    playTV(id, season, episode);
+    if(type === 'movie') {
+      playMovie(id);
+    }else {
+      playTV(id,1,1);
+    }
   };
 
   useEffect(() => {

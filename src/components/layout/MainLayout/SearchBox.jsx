@@ -13,14 +13,18 @@ const SearchBox = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setSearchParams({ q: enteredSearchBox })
+    if (enteredSearchBox.trim() == "") {
+      setSearchParams({});
+    } else {
+      setSearchParams({ q: enteredSearchBox });
+    }
   }, [enteredSearchBox]);
 
   useEffect(() => {
-    if(!isEntered) {
-        firstType.current = 0
+    if (!isEntered) {
+      firstType.current = 0;
     }
-  }, [isEntered])
+  }, [isEntered]);
 
   const handleSearchBoxClick = () => {
     setToggleSearchBox((prevState) => !prevState);
@@ -31,8 +35,8 @@ const SearchBox = () => {
     setEnteredSearchBox(e.target.value);
     if (e.target.value !== "" && firstType.current <= 1) {
       navigate(`/vn/search?q=${e.target.value}`);
-      window.sessionStorage.setItem('lastPage', location.pathname)
-    } 
+      window.sessionStorage.setItem("lastPage", location.pathname);
+    }
   };
 
   const handleInputBlur = () => {

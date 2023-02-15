@@ -1,11 +1,11 @@
 import React, { useState, memo, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import classes from "./MovieCard.module.scss";
 import image from "../../assets/images/Poster Not Available.jpg";
 import { RoundedButton } from ".././UI";
 import { PlaySVG, PlusSVG, ArrowDownSVG, CheckSVG } from "../SVG";
 import { usePlayMovie, usePlayTV, useWishList } from "../../hooks";
-import { MovieModal, TVShowModal } from "../Modal";
+import { addModal } from "../../store/modalSlice";
 
 const MovieCard = ({
   posterURL,
@@ -16,20 +16,19 @@ const MovieCard = ({
   type,
   ...rest
 }) => {
-  const [showModal, setShowModal] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const playMovie = usePlayMovie();
   const playTV = usePlayTV();
   const { addToList, isInWishList } = useWishList(id);
   const genresList = useSelector((state) => state.movie.genresInfo);
-  const transformedGenresList = genres?.map((genresItem, i) => {
-    return genresList?.genres?.find(d => d.id === genresItem);
-  }, [genresList])
+  const transformedGenresList = genres?.map(
+    (genresItem, i) => {
+      return genresList?.genres?.find((d) => d.id === genresItem);
+    },
+    [genresList]
+  );
   let timerId = useRef();
-  
-  const handleHideModal = () => {
-    setShowModal(false);
-  };
+  const dispatch = useDispatch();
 
   const handlePlayMovie = (e) => {
     e.stopPropagation();
@@ -55,8 +54,7 @@ const MovieCard = ({
   };
 
   const handleShowModal = (e) => {
-    e.stopPropagation();
-    setShowModal(true);
+    dispatch(addModal({ id, type }));
   };
 
   const handleMouseEnter = () => {
@@ -73,58 +71,47 @@ const MovieCard = ({
   };
 
   return (
-    <>
-      {type == "tv" && (
-        <TVShowModal onHide={handleHideModal} id={id} isShow={showModal} />
-      )}
-      {type == "movie" && (
-        <MovieModal onHide={handleHideModal} id={id} isShow={showModal} />
-      )}
-      <div
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className={`${classes.movieCard} ${
-          isHovered ? classes.cardHover : ""
-        } ${className}`}
-      >
-        <div onClick={handlePlayMovie} className={classes.cardImgWrapper}>
-          <img
-            loading="lazy"
-            src={`${process.env.REACT_APP_BASE_IMAGE_URL}${posterURL}` || image}
-            alt="film background img"
-          />
-        </div>
-        <div className={classes.cardContent} onClick={handleShowModal}>
-          <div className={classes.cardActions}>
-            <div className={classes.cardActionsRight}>
-              <RoundedButton
-                onClick={handlePlayMovie}
-                className={classes.action}
-              >
-                <PlaySVG />
-              </RoundedButton>
-              <RoundedButton
-                onClick={handleAddToWishList}
-                className={classes.action}
-              >
-                {isInWishList ? <CheckSVG /> : <PlusSVG />}
-              </RoundedButton>
-            </div>
-            <RoundedButton onClick={handleShowModal} className={classes.action}>
-              <ArrowDownSVG />
+    <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`${classes.movieCard} ${
+        isHovered ? classes.cardHover : ""
+      } ${className}`}
+    >
+      <div onClick={handlePlayMovie} className={classes.cardImgWrapper}>
+        <img
+          loading="lazy"
+          src={`${process.env.REACT_APP_BASE_IMAGE_URL}${posterURL}` || image}
+          alt="film background img"
+        />
+      </div>
+      <div className={classes.cardContent} onClick={handleShowModal}>
+        <div className={classes.cardActions}>
+          <div className={classes.cardActionsRight}>
+            <RoundedButton onClick={handlePlayMovie} className={classes.action}>
+              <PlaySVG />
+            </RoundedButton>
+            <RoundedButton
+              onClick={handleAddToWishList}
+              className={classes.action}
+            >
+              {isInWishList ? <CheckSVG /> : <PlusSVG />}
             </RoundedButton>
           </div>
-          <h3 className={classes.cardMovieName}>{movieName}</h3>
-          <ul className={classes.genresList}>
-            {transformedGenresList?.slice(0, 3).map((genre) => (
-              <li key={genre?.id} className={classes.genre}>
-                {genre?.name}
-              </li>
-            ))}
-          </ul>
+          <RoundedButton onClick={handleShowModal} className={classes.action}>
+            <ArrowDownSVG />
+          </RoundedButton>
         </div>
+        <h3 className={classes.cardMovieName}>{movieName}</h3>
+        <ul className={classes.genresList}>
+          {transformedGenresList?.slice(0, 3).map((genre) => (
+            <li key={genre?.id} className={classes.genre}>
+              {genre?.name}
+            </li>
+          ))}
+        </ul>
       </div>
-    </>
+    </div>
   );
 };
 

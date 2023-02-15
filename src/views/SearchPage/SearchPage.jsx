@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useCallback, useState } from "react";
+import { Spinner } from "react-bootstrap";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../store/Auth/AuthProvider";
 import { debounce } from "../../functions";
@@ -26,13 +27,13 @@ const SearchPage = () => {
       } catch (e) {
         console.log(e);
       }
-      setIsLoading(false)
+      setIsLoading(false);
     }),
     []
   );
 
   useEffect(() => {
-    if (searchParams.get("q") === "") {
+    if (searchParams.get("q") === "" || !searchParams.get("q")) {
       setSearchParams({});
       if (lastPage) {
         navigate(lastPage);
@@ -40,30 +41,37 @@ const SearchPage = () => {
         navigate("/vn/home/" + ctx.currentUser.uid);
       }
     } else {
-      getSearchResult(searchParams.get("q"));
+      const data = searchParams.get("q");
+      getSearchResult(data);
     }
   }, [searchParams]);
 
-  if(isLoading) {
-    return <Loading/>
-  }
-
   return (
     <div className={classes.searchPage}>
-      <div className={classes.movieCardWrapper}>
-        {searchResults.length > 0  && searchResults.map((result) => (
-          <MovieCard
-            key={result?.id}
-            id={result?.id}
-            posterURL={result?.posterURL}
-            movieName={result?.movieName}
-            genres={result?.genres}
-            type={result?.type}
-            className={classes.movieCard}
-          />
-        ))}
-        {!(searchResults.length > 0) && <p className="text-light display-1">No results</p>}
-      </div>
+      {isLoading && (
+        <div className={classes.loading}>
+          <Spinner animation="border" variant="light" />
+        </div>
+      )}
+      {!isLoading && (
+        <div className={classes.movieCardWrapper}>
+          {searchResults.length > 0 &&
+            searchResults.map((result) => (
+              <MovieCard
+                key={result?.id}
+                id={result?.id}
+                posterURL={result?.posterURL}
+                movieName={result?.movieName}
+                genres={result?.genres}
+                type={result?.type}
+                className={classes.movieCard}
+              />
+            ))}
+          {!(searchResults.length > 0) && (
+            <p className="text-light display-1">No results</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

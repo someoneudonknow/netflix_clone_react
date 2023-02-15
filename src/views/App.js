@@ -1,7 +1,7 @@
 import "./App.scss";
-import { lazy, Suspense, useEffect, useContext } from "react";
+import { lazy, Suspense, useEffect, useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Loading } from "../components/UI";
 import { LoginForm, RegisterForm } from "../components/Forms";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
@@ -9,6 +9,7 @@ import { AuthContext } from "../store/Auth/AuthProvider";
 import { getWishList, updateList } from "../store/wishListActions";
 import { getGenresList } from "../store/movieActions";
 import { MainLayout } from "../components/layout";
+import { MovieModal, TVShowModal } from "../components/Modal";
 
 const SearchPage = lazy(() => import("./SearchPage"));
 const WelcomePage = lazy(() => import("./Welcome"));
@@ -18,12 +19,32 @@ const WatchPage = lazy(() => import("./WatchPage"));
 const TVShowsPage = lazy(() => import("./TVShows"));
 const TrendingPage = lazy(() => import("./TrendingPage"));
 const MyListPage = lazy(() => import("./MyListPage"));
+const ProfilePage = lazy(() => import("./ProfilePage"));
+
+//TODO: fuckkkkkkkk this shit
+//TODO: fix modal saving state
 
 function App() {
+  const [show, setShow] = useState(false);
+  const [currentModal, setCurrentModal] = useState();
   const wishList = useSelector((state) => state.wishList.currentUserWishList);
+  const modalList = useSelector((state) => state.modals.currentModals);
   const isChanged = useSelector((state) => state.wishList.changed);
   const ctx = useContext(AuthContext);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (modalList.length > 0) {
+      setCurrentModal(modalList[modalList.length - 1]);
+      setShow(true);
+    } else {
+      setCurrentModal(null);
+    }
+  }, [modalList, dispatch]);
+
+  const handleHideModal = () => {
+    setShow(false);
+  };
 
   useEffect(() => {
     if (isChanged) {
@@ -42,64 +63,79 @@ function App() {
   }, [ctx, ctx?.currentUser?.uid]);
 
   return (
-    <Suspense fallback={<Loading />}>
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/vn/welcome" />} />
-        <Route path="/vn/welcome" element={<WelcomePage />} />
-        <Route path="/vn/login_register" element={<LoginSignUpPage />}>
-          <Route path="login" element={<LoginForm />} />
-          <Route path="register" element={<RegisterForm />} />
-        </Route>
-        <Route
-          path="/vn"
-          element={
-            <PrivateRoute>
-              <MainLayout />
-            </PrivateRoute>
-          }
-        >
+    <>
+      {currentModal && currentModal.type === "movie" && (
+        <MovieModal
+          id={currentModal.id}
+          isShow={show}
+          onHide={handleHideModal}
+        />
+      )}
+      {currentModal && currentModal.type === "tv" && (
+        <TVShowModal
+          id={currentModal.id}
+          isShow={show}
+          onHide={handleHideModal}
+        />
+      )}
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/vn/welcome" />} />
+          <Route path="/vn/welcome" element={<WelcomePage />} />
+          <Route path="/vn/login_register" element={<LoginSignUpPage />}>
+            <Route path="login" element={<LoginForm />} />
+            <Route path="register" element={<RegisterForm />} />
+          </Route>
           <Route
-            path="home/:userId"
+            path="/vn"
             element={
               <PrivateRoute>
-                <HomePage />
+                <MainLayout />
               </PrivateRoute>
             }
-          />
+          >
+            <Route
+              path="home/:userId"
+              element={
+                <PrivateRoute>
+                  <HomePage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="TVShow"
+              element={
+                <PrivateRoute>
+                  <TVShowsPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="trending"
+              element={
+                <PrivateRoute>
+                  <TrendingPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="myList"
+              element={
+                <PrivateRoute>
+                  <MyListPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="search"
+              element={
+                <PrivateRoute>
+                  <SearchPage />
+                </PrivateRoute>
+              }
+            />
+          </Route>
           <Route
-            path="TVShow"
-            element={
-              <PrivateRoute>
-                <TVShowsPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="trending"
-            element={
-              <PrivateRoute>
-                <TrendingPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="myList"
-            element={
-              <PrivateRoute>
-                <MyListPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="search"
-            element={
-              <PrivateRoute>
-                <SearchPage />
-              </PrivateRoute>
-            }
-          />
-        </Route>
-        <Route
             path="/vn/watch"
             element={
               <PrivateRoute>
@@ -107,9 +143,18 @@ function App() {
               </PrivateRoute>
             }
           />
-        <Route path="/*" element={<Navigate replace to="/vn/welcome" />} />
-      </Routes>
-    </Suspense>
+          <Route
+            path="/vn/profile"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/*" element={<Navigate replace to="/vn/welcome" />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 

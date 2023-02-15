@@ -12,7 +12,7 @@ const BackgroundImage = ({ src, children, className }) => {
                      url(${src}) no-repeat center/cover`,
       }}
     >
-      <Link to="/vn">
+      <Link to="/vn/welcome">
         <img src={logo} alt="logo" />
       </Link>
       {children}

@@ -42,6 +42,7 @@ const MovieCardSlider = ({ title, movieList, tv }, ref) => {
                 movieName={movie.title}
                 genres={movie.genresId}
                 id={movie?.id}
+                key={movie?.id}
               />
             </SwiperSlide>
           );

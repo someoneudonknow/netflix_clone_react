@@ -22,7 +22,6 @@ const RegisterForm = () => {
   });
   const [isEmailFocused, setIsEmailFocused] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
-  const [isPhoneNumberFocused, setIsPhoneNumberFocused] = useState(false);
   const [isPasswordConfirmFocused, setIsPasswordConfirmFocused] =
     useState(false);
   const [isPasswordShow, setIsPasswordShow] = useState(true);
@@ -68,16 +67,6 @@ const RegisterForm = () => {
     }
   };
 
-  const handlePhoneNumberFocus = () => {
-    setIsPhoneNumberFocused(true);
-  };
-
-  const handlePhoneNumberBlur = (e) => {
-    if (e.target.value === "") {
-      setIsPhoneNumberFocused(false);
-    }
-  };
-
   const handlePasswordConfirmFocused = () => {
     setIsPasswordConfirmFocused(true);
   };
@@ -104,13 +93,12 @@ const RegisterForm = () => {
         password
       );
       const { user } = credentialUser;
-      const docRef = await setDoc(doc(db, "users", `${user.uid}`), {
-        displayName: user?.displayName,
+      await setDoc(doc(db, "users", `${user.uid}`), {
+        displayName: user?.displayName || user.email,
         email: user.email,
         photoUrl: user?.photoURL,
         uid: user.uid,
         providerId: user.providerData[0].providerId,
-        phoneNumber,
         wishList: [],
       });
 
@@ -162,35 +150,6 @@ const RegisterForm = () => {
             {errors.email?.type === "required" && "Vui lòng nhập email"}
             {errors.email?.type === "pattern" &&
               "Vui lòng nhập đúng định dạng email"}
-          </small>
-        </div>
-        <div
-          className={`${classes.formControl} ${
-            isPhoneNumberFocused ? classes.focusInput : ""
-          } ${errors.email ? classes.invalid : ""}`}
-        >
-          <input
-            {...register("phoneNumber", {
-              required: true,
-              pattern:
-                /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-              maxLength: 10,
-              onBlur: handlePhoneNumberBlur,
-            })}
-            name="phoneNumber"
-            onFocus={handlePhoneNumberFocus}
-            className="text-bg-dark rounded"
-            type="text"
-            id="phoneNumber"
-          />
-          <label htmlFor="phoneNumber">Nhập số điện thoại</label>
-          <small className={classes.errorMessage}>
-            {errors.phoneNumber?.type === "required" &&
-              "Vui lòng nhập số điện thoại"}
-            {errors.phoneNumber?.type === "pattern" &&
-              "Vui lòng nhập đúng định dạng số điện thoại"}
-            {errors.phoneNumber?.type === "maxLength" &&
-              "Số điện thoại phải bé hơn 10 số"}
           </small>
         </div>
         <div

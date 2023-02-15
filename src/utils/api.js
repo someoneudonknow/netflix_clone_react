@@ -1,4 +1,4 @@
-import defaultImg from "../assets/images/Poster Not Available.jpg"
+import defaultImg from "../assets/images/Poster Not Available.jpg";
 
 const checkIsRelease = (releaseDate) => {
   const releaseTime = new Date(releaseDate).getTime();
@@ -221,7 +221,6 @@ export const getSimilarTVShows = async (id) => {
   const data = await response.json();
 
   const transformedData = data?.results.map((tv) => {
-    console.log(tv?.first_air_date, tv.name);
     return {
       posterURL: tv.backdrop_path || tv.poster_path,
       title: tv.name || tv.original_name,

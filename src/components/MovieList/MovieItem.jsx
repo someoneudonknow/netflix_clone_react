@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { Col, Card } from "react-bootstrap";
+import {
+  Col,
+  Card,
+} from "react-bootstrap";
 import Skeleton from "react-loading-skeleton";
 import { RoundedButton } from "../UI";
 import classes from "./MovieItem.module.scss";
 import { PlusSVG, PlaySVG, CheckSVG } from "../SVG";
 import { useWishList } from "../../hooks";
-
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 const MovieItem = ({
   posterURL,
   overview,
@@ -59,9 +63,20 @@ const MovieItem = ({
         </RoundedButton>
         <Card.Body className={`${classes.cardBody}`}>
           <Card.Title className="d-flex justify-content-between align-items-center">
-            <span className={classes.year}>{title}</span>
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                (<Tooltip id={`tooltip-${title}`}>
+                  Tooltip on <strong>{title}</strong>.
+                </Tooltip>)
+              }
+            >
+              <span title={title} className={classes.filmName}>
+                {title}
+              </span>
+            </OverlayTrigger>
             <RoundedButton onClick={handleAddToWishList}>
-              {isInWishList ? <CheckSVG/> : <PlusSVG />}
+              {isInWishList ? <CheckSVG /> : <PlusSVG />}
             </RoundedButton>
           </Card.Title>
           <Card.Text className={classes.cardText}>{overview}</Card.Text>

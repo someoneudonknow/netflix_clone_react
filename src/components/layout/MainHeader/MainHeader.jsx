@@ -1,18 +1,19 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Col } from "react-bootstrap";
 import classes from "./MainHeader.module.scss";
 import BackgroundVideo from "../../BackgroundVideo";
 import defaultImg from "../../../assets/images/Poster Not Available.jpg";
 import { Wrapper, Loading, Title, WhiteButton, GrayButton } from "../../UI";
 import { getTrending } from "../../../utils/api";
-import { MovieModal, TVShowModal } from "../../Modal";
 import { getTVById } from "../../../utils/api";
+import { addModal } from "../../../store/modalSlice";
 
 const MainHeader = ({ type, onPlay }) => {
   const [lastestMovie, setLastestMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [currentTV, setCurrentTV] = useState({});
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
@@ -20,9 +21,7 @@ const MainHeader = ({ type, onPlay }) => {
       try {
         const data = await getTrending("day", type);
         const randomIndex = Math.floor(Math.random() * (data.length - 1));
-        
         setLastestMovie(data[0]);
-
         if (type === "tv") {
           const currentTV = await getTVById(data[0]?.id);
           setCurrentTV(currentTV);
@@ -47,31 +46,11 @@ const MainHeader = ({ type, onPlay }) => {
   };
 
   const handleShowModal = () => {
-    setShowModal(true);
-  };
-
-  const handleHideModal = () => {
-    setShowModal(false);
+    dispatch(addModal({ id: Number(lastestMovie.id), type }));
   };
 
   return (
     <>
-      {type == "movie" && (
-        <MovieModal
-          isShow={showModal}
-          onHide={handleHideModal}
-          currentMovie={lastestMovie}
-          id={lastestMovie.id}
-        />
-      )}
-      {type == "tv" && (
-        <TVShowModal
-          isShow={showModal}
-          onHide={handleHideModal}
-          currentMovie={lastestMovie}
-          id={lastestMovie.id}
-        />
-      )}
       <BackgroundVideo
         className={classes.container}
         src={
