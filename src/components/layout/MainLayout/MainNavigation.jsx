@@ -72,7 +72,7 @@ const AvatarDropdown = ({ userName, userAvatar }) => {
     <div className={classes.dropdownMenu}>
       <ul>
         <li>
-          <img src={userAvatar} alt="avatar" />
+          <img className={classes.dropdownAvt} src={userAvatar} alt="avatar" />
           <a href="#">
             <p className="text-truncate" style={{ maxWidth: "14rem" }}>
               {userName}

@@ -1,14 +1,14 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { Spinner } from "react-bootstrap";
+import React, { useState, useContext, useEffect } from "react";
+import { Spinner, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import classes from "./ProfilePage.module.scss";
-import { EditSVG } from "../../components/SVG";
 import { AuthContext } from "../../store/Auth/AuthProvider";
 import { db } from "../../firebase/config";
-import defaultAvt from "../../assets/images/avatar_bigger.png";
+import { EditSVG } from "../../components/SVG";
+import { uploadAvatarImage } from "../../functions";
 
 const Loading = () => {
   return (
@@ -27,12 +27,14 @@ const ProfilePage = () => {
   } = useForm({ mode: "onTouched" });
   const [userInfo, setUserInfo] = useState({});
   const { currentUser } = useContext(AuthContext);
-  const fileRef = useRef();
   const [isFormChanged, setIsFormChanged] = useState(false);
   const [docRef, setDocRef] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [photoURL, setPhotoURL] = useState();
+  const [showError, setShowError] = useState(false);
+  const [imageFile, setImageFile] = useState();
+  const [error, setError] = useState();
   const navigate = useNavigate();
+  const userCtx = useContext(AuthContext);
 
   useEffect(() => {
     window.sessionStorage.setItem("currentPage", JSON.stringify("profile"));
@@ -42,11 +44,29 @@ const ProfilePage = () => {
   }, []);
 
   useEffect(() => {
+    let timeoutId;
+    if (error) {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      timeoutId = setTimeout(() => {
+        setError(null);
+        setShowError(false);
+        timeoutId = null;
+      }, 2000);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [error]);
+
+  useEffect(() => {
     if (userInfo?.displayName?.trim() !== "") {
       setValue("editedName", userInfo?.displayName?.trim());
-    }
-    if (userInfo?.phoneNumber?.trim() !== "") {
-      setValue("editedPhoneNumber", userInfo?.phoneNumber?.trim());
     }
   }, [userInfo]);
 
@@ -58,8 +78,6 @@ const ProfilePage = () => {
         const userData = await getDoc(docRef);
         setUserInfo({
           displayName: userData?.data().displayName,
-          phoneNumber: userData?.data().phoneNumber,
-          photoURL: userData?.data().photoURL,
         });
         setDocRef(docRef);
       } catch (e) {
@@ -67,33 +85,51 @@ const ProfilePage = () => {
       }
       setIsLoading(false);
     };
-
     getUserInfo();
   }, []);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+
+    if (!file.type.startsWith("image")) {
+      setError("not image file");
+      setShowError(true);
+      return;
+    }
+    const src = URL.createObjectURL(file);
+    const data = {
+      imgSrc: src,
+      imgFile: file,
+    };
+    setImageFile(data);
+    setIsFormChanged(true);
+  };
+
   const handleProfileUpdateSubmit = async (data) => {
     if (isFormChanged) {
-      console.log(data);
       setIsLoading(true);
       try {
-        await updateProfile(currentUser, {
-          displayName: data.editedName,
-        });
-        const dataFireStore = {
+        const dataUpdated = {
           displayName: data.editedName,
         };
-        await updateDoc(docRef, dataFireStore);
+        await updateProfile(currentUser, { displayName: data.editedName });
+        await updateDoc(docRef, dataUpdated);
+        await uploadAvatarImage(
+          imageFile.imgFile,
+          userCtx.currentUser,
+          setIsLoading
+        );
       } catch (e) {
         console.log(e);
       }
       setIsLoading(false);
     }
 
-    navigate(-1);
+    navigate("/vn/home/" + userCtx?.currentUser?.uid);
   };
 
   const handleCancel = () => {
-    navigate(-1);
+    navigate("/vn/home/" + userCtx?.currentUser?.uid);
   };
   return (
     <div className={classes.container}>
@@ -104,8 +140,30 @@ const ProfilePage = () => {
           className={classes.editProfileForm}
           onSubmit={handleSubmit(handleProfileUpdateSubmit)}
         >
+          <Alert show={showError} variant="danger">
+            <p style={{ fontSize: "1.7rem" }}>{error}</p>
+          </Alert>
           <div className={classes.wrapper}>
             {isLoading && <Loading />}
+            <div
+              style={{
+                background: `#fff url(${
+                  imageFile?.imgSrc || userCtx?.currentUser?.photoURL
+                }) no-repeat center/cover`,
+              }}
+              className={classes.avatarWrapper}
+            >
+              <label htmlFor="avatarInput">
+                <EditSVG />
+              </label>
+              <input
+                onChange={handleFileChange}
+                type="file"
+                hidden
+                id="avatarInput"
+                accept="image/*"
+              />
+            </div>
             <div className={classes.rigthPart}>
               <div
                 className={`${classes.formControl} ${

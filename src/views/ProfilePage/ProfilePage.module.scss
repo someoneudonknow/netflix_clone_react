@@ -20,13 +20,48 @@
     .editProfileForm {
       width: 100%;
       margin-top: 2.2rem;
-      
+
       .wrapper {
         position: relative;
         display: flex;
 
+        .avatarWrapper {
+          $size: 12.4rem;
+          height: $size;
+          width: $size;
+          margin-right: 2.2rem;
+          border-radius: 0.5rem;
+          position: relative;
+          z-index: var(--layer-4);
+
+          label {
+            z-index: var(--layer-3);
+            position: absolute;
+            height: 3.5rem;
+            width: 3.5rem;
+            background-color: black;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            transition: all ease 0.2s;
+            left: 1rem;
+            bottom: 1rem;
+
+            &:hover {
+              scale: 1.2;
+              cursor: pointer;
+            }
+            svg {
+              path {
+                fill: white;
+              }
+            }
+          }
+        }
+
         .rigthPart {
           flex: 1;
+
           .formControl {
             margin-bottom: 2.2rem;
 
@@ -64,8 +99,11 @@
         padding: 0.8rem 2rem;
         margin-right: 2rem;
         transition: all ease 0.1s;
+        border: none;
+        outline: none;
 
-        &:disabled, &[disabled] {
+        &:disabled,
+        &[disabled] {
           opacity: 0.9;
         }
       }
@@ -106,6 +144,5 @@
     $size: 4rem;
     height: $size;
     width: $size;
-
   }
 }

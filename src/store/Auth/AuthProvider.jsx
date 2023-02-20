@@ -14,12 +14,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log({"login": auth.currentUser});
         const currentPage = JSON.parse(
           window.sessionStorage.getItem("currentPage")
         );
         setCurrentUser(user);
-
         if (currentPage) {
           switch (currentPage) {
             case "home":
