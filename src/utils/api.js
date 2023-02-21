@@ -293,3 +293,20 @@ export const getSearchResults = async (q, page = 1, adult = false) => {
 
   return transformedResults;
 };
+
+export const getUpcoming = async () => {
+  const respone = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}`
+  );
+
+  const results = await respone.json();
+
+  const transformedResults = results?.results?.map(result => ({
+    id: result.id,
+    title: result.title || result.original_title,
+    releaseDate: result.release_date,
+    posterURL: result.backdrop_path || result.poster_path
+  }));
+
+  return transformedResults;
+};

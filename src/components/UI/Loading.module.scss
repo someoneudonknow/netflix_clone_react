@@ -1,4 +1,4 @@
-@keyframes loadinganim {
+@keyframes loadingAnimation {
   0% {
     transform: rotate(360deg);
   }
@@ -31,7 +31,7 @@
     font-family: helvetica, sans-serif;
 
     .bulletouter {
-      animation: loadinganim 1s infinite;
+      animation: loadingAnimation 1s infinite;
       animation-timing-function: linear;
       animation-direction: reverse;
       width: 6.5rem;

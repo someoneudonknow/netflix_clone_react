@@ -1,0 +1,120 @@
+.notification {
+  position: relative;
+
+  i {
+    color: #fff;
+    font-size: 2.5rem;
+  }
+
+  .newFilm {
+    $size: 1.9rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    height: $size;
+    width: $size;
+    background-color: #fff;
+    position: absolute;
+    top: -0.8rem;
+    right: -0.9rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+  }
+
+  &::after {
+    content: "";
+    width: 10rem;
+    height: 3rem;
+    position: absolute;
+    background-color: transparent;
+    top: calc(100%);
+    right: 0;
+  }
+
+  .notificationBox {
+    min-height: 10rem;
+    min-width: 45rem;
+    max-height: 40rem;
+    overflow-y: scroll;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    position: absolute;
+    right: -0.5rem;
+    top: calc(100% + 2.5rem);
+    border-top: 0.3rem solid #fff;
+    z-index: 100;
+    animation: flash linear 0.2s;
+
+    .notiListWrapper {
+      padding: 0;
+      background-color: transparent;
+    }
+
+    .spinnerWrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &::after {
+      $arrowSize: 2rem;
+      content: "";
+      border-top: $arrowSize solid transparent;
+      border-left: $arrowSize solid transparent;
+      border-right: $arrowSize solid transparent;
+      border-bottom: $arrowSize solid white;
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+    }
+  }
+}
+
+.notifiItem {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  padding: 2rem;
+  transition: all ease 0.1s;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--primary-text);
+  }
+
+  &:hover {
+    background-color: rgba($color: #000000, $alpha: 1);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  img {
+    height: 80%;
+    border-radius: 5px;
+  }
+
+  .notifiContent {
+    margin-left: 2rem;
+
+    h3 {
+      font-size: 2rem;
+      font-weight: normal;
+      color: var(--primary-text);
+      transition: all linear 0.01s;
+      color: var(--lighter-primary-text);
+      &:hover {
+        color: #fff;
+      }
+    }
+    p {
+      font-size: 1.5rem;
+      color: var(--primary-text);
+    }
+  }
+}

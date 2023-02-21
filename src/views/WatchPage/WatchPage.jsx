@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addModal, removeModal } from "../../store/modalSlice";
+import { addModal, removeModal, removeAllModals } from "../../store/modalSlice";
 import classes from "./WatchPage.module.scss";
 import Skeleton from "react-loading-skeleton";
 
@@ -20,7 +20,7 @@ const WatchPageSkeleton = () => {
 };
 
 const WatchPage = () => {
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const isMovie = searchParams.get("isMovie");
   let url;
@@ -38,20 +38,18 @@ const WatchPage = () => {
     url = `${process.env.REACT_APP_WATCH_TV_BASE_URL}${tvId}&s=${s}&e=${e}`;
   }
 
+  const handleIFrameLoad = (e) => {
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    dispatch(removeModal({id: Number(searchParams.get("id"))}))
-    setIsLoading(true);
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    const currentModals = JSON.parse(sessionStorage.getItem("modals"));
+    dispatch(removeAllModals());
 
     return () => {
-      clearTimeout(timeout);
-      if (isMovie === "true") {
-        dispatch(addModal({ id: Number(searchParams.get("id")), type: "movie" }));
-      } else {
-        dispatch(addModal({ id: Number(searchParams.get("id")), type: "tv" }));
-      }
+      currentModals.forEach((modal) =>
+        dispatch(addModal({ id: modal.id, type: modal.type }))
+      );
     };
   }, []);
 
@@ -69,12 +67,11 @@ const WatchPage = () => {
       </nav>
       <div className={classes.wrapper}>
         <iframe
-          allow="accelerometer;"
+          onLoad={handleIFrameLoad}
           allowFullScreen
           title="embeded movie"
           width="100%"
           height="100%"
-          frameborder="0"
           src={url}
         ></iframe>
       </div>

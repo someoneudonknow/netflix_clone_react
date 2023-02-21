@@ -21,9 +21,6 @@ const TrendingPage = lazy(() => import("./TrendingPage"));
 const MyListPage = lazy(() => import("./MyListPage"));
 const ProfilePage = lazy(() => import("./ProfilePage"));
 
-//TODO: fuckkkkkkkk this shit
-//TODO: fix modal saving state
-
 function App() {
   const [show, setShow] = useState(false);
   const [currentModal, setCurrentModal] = useState();

@@ -38,9 +38,16 @@ const modalSlice = createSlice({
         JSON.stringify(state.currentModals)
       );
     },
+    removeAllModals: (state) => {
+      state.currentModals = [];
+      window.sessionStorage.setItem(
+        "modals",
+        JSON.stringify(state.currentModals)
+      );
+    }
   },
 });
 
-export const { addModal, removeModal } = modalSlice.actions;
+export const { addModal, removeModal, removeAllModals } = modalSlice.actions;
 
 export default modalSlice.reducer;

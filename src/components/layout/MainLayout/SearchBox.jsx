@@ -5,7 +5,7 @@ import classes from "./SearchBox.module.scss";
 const SearchBox = () => {
   const [toggleSearchBox, setToggleSearchBox] = useState(false);
   const [enteredSearchBox, setEnteredSearchBox] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
   const location = useLocation();
   const isEntered = enteredSearchBox.trim() != "";
   const inputRef = useRef();
@@ -35,6 +35,7 @@ const SearchBox = () => {
     setEnteredSearchBox(e.target.value);
     if (e.target.value !== "" && firstType.current <= 1) {
       navigate(`/vn/search?q=${e.target.value}`);
+      inputRef.focus()
       window.sessionStorage.setItem("lastPage", location.pathname);
     }
   };
