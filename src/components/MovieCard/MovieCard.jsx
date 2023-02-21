@@ -20,13 +20,28 @@ const MovieCard = ({
   const playMovie = usePlayMovie();
   const playTV = usePlayTV();
   const { addToList, isInWishList } = useWishList(id);
+
   const genresList = useSelector((state) => state.movie.genresInfo);
-  const transformedGenresList = genres?.map(
-    (genresItem, i) => {
-      return genresList?.genres?.find((d) => d.id === genresItem);
-    },
-    [genresList]
-  );
+  const tvGenresList = useSelector((state) => state.tv.tvGenresInfo);
+
+  let transformedGenresList = [];
+
+  if (type === "movie") {
+    transformedGenresList = genres?.map(
+      (genresItem) => {
+        return genresList?.genres?.find((d) => d.id === genresItem);
+      },
+      [genresList]
+    );
+  }else {
+    transformedGenresList = genres?.map(
+      (genresItem) => {
+        return tvGenresList?.genres?.find((d) => d.id === genresItem);
+      },
+      [tvGenresList]
+    );
+  }
+  
   let timerId = useRef();
   const dispatch = useDispatch();
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getGenres, getTVShowByGenres } from "../../utils/api";
+import { getTVGenres, getTVShowByGenres } from "../../utils/api";
 import MovieCardSlider from "../../components/MovieCardSlider";
 import { MainWrapper } from "../../components/UI";
 import MovieSliderSkeleton from "../../components/MovieCardSlider";
@@ -14,7 +14,6 @@ const TVShowsMain = () => {
   const observer = useRef(
     new IntersectionObserver((entries) => {
       const first = entries[0];
-      console.log(entries)
       if (first.isIntersecting) {
         setPageNum((no) => no + 3);
       }
@@ -23,7 +22,7 @@ const TVShowsMain = () => {
 
   useEffect(() => {
     const callGenres = async () => {
-      const data = await getGenres();
+      const data = await getTVGenres();
       setGenres(data?.genres);
     };
 

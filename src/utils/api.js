@@ -18,6 +18,17 @@ export const getGenres = async () => {
   return genresList;
 };
 
+export const getTVGenres = async () => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/genre/tv/list?api_key=${process.env.REACT_APP_API_KEY}`
+  );
+
+  const genresList = await response.json();
+  console.log(genresList);
+
+  return genresList;
+};
+
 export const getTrending = async (time, type) => {
   const response = await fetch(
     `${process.env.REACT_APP_BASE_URL}/trending/${type}/${time}?api_key=${process.env.REACT_APP_API_KEY}`
@@ -65,14 +76,41 @@ export const getMoviesByGenres = async (genresId, page) => {
   const response = await fetch(
     `${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${
       process.env.REACT_APP_API_KEY
-    }${new URLSearchParams({
+    }&${new URLSearchParams({
       with_genres: genresId,
       page: page,
     })}`
   );
+
   const movieList = await response.json();
 
   const transformedData = movieList?.results.map((movie) => {
+    return {
+      isAdult: movie.adult,
+      title: movie.title,
+      description: movie.overview,
+      id: movie.id,
+      posterURL: movie.backdrop_path || movie.poster_path,
+      genresId: movie?.genre_ids,
+    };
+  });
+
+  return transformedData;
+};
+
+export const getMoviesByPeoples = async (id, page) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}/discover/movie?api_key=${
+      process.env.REACT_APP_API_KEY
+    }&${new URLSearchParams({
+      with_people: id,
+      page: page,
+    })}`
+  );
+
+  const moviesList = await response.json();
+
+  const transformedData = moviesList?.results.map((movie) => {
     return {
       isAdult: movie.adult,
       title: movie.title,
@@ -168,7 +206,7 @@ export const getTVShowByGenres = async (genresId, page) => {
   const response = await fetch(
     `${process.env.REACT_APP_BASE_URL}/discover/tv?api_key=${
       process.env.REACT_APP_API_KEY
-    }${new URLSearchParams({
+    }&${new URLSearchParams({
       with_genres: genresId,
       page: page,
     })}`
@@ -301,11 +339,11 @@ export const getUpcoming = async () => {
 
   const results = await respone.json();
 
-  const transformedResults = results?.results?.map(result => ({
+  const transformedResults = results?.results?.map((result) => ({
     id: result.id,
     title: result.title || result.original_title,
     releaseDate: result.release_date,
-    posterURL: result.backdrop_path || result.poster_path
+    posterURL: result.backdrop_path || result.poster_path,
   }));
 
   return transformedResults;

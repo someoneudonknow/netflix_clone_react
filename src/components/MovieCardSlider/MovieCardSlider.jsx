@@ -11,6 +11,10 @@ import "swiper/scss/pagination";
 const MovieCardSlider = ({ title, movieList, tv }, ref) => {
   const swiperRef = useRef();
 
+  if(movieList?.length <= 0) {
+    return;
+  }
+
   return (
     <div ref={ref}>
       <h1 className={classes.title}>{title}</h1>

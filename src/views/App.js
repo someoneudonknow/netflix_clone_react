@@ -1,13 +1,14 @@
 import "./App.scss";
 import { lazy, Suspense, useEffect, useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Loading } from "../components/UI";
 import { LoginForm, RegisterForm } from "../components/Forms";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import { AuthContext } from "../store/Auth/AuthProvider";
 import { getWishList, updateList } from "../store/wishListActions";
 import { getGenresList } from "../store/movieActions";
+import { getTVGenresList } from "../store/TVActions";
 import { MainLayout } from "../components/layout";
 import { MovieModal, TVShowModal } from "../components/Modal";
 
@@ -51,6 +52,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getGenresList());
+    dispatch(getTVGenresList());
   }, []);
 
   useEffect(() => {
