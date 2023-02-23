@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { getGenres, getMoviesByGenres, getTVShowByGenres } from "../../utils/api";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { getGenres, getMoviesByGenres } from "../../utils/api";
 import MovieCardSlider from "../../components/MovieCardSlider";
 import { MainWrapper } from "../../components/UI";
 import MovieSliderSkeleton from "../../components/MovieCardSlider";
@@ -29,7 +29,7 @@ const HomeMain = () => {
     callGenres(); // get all the movie genres list
   }, []);
 
-  const callMovies = async () => {
+  const callMovies = useCallback(async () => {
     setIsLoading(true);
     const genresArrayToCall = genres.slice(pageNum - 3, pageNum);
 
@@ -43,12 +43,12 @@ const HomeMain = () => {
     setMoviesByGenre((prev) => {
       return [...prev, ...mappingData].filter(
         (value, index, self) =>
-          index === self.findIndex((t) => t.genre === value.genre)
+          index === self.findIndex((t) => t.genre.id === value.genre.id)
       ); // return unduplicate array
     });
 
     setIsLoading(false);
-  }; // call movies function
+  }, [genres, pageNum]); // call movies function
 
   useEffect(() => {
     const call = async () => {

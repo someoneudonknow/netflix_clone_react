@@ -1,5 +1,5 @@
 import "./App.scss";
-import { lazy, Suspense, useEffect, useContext, useState } from "react";
+import { lazy, Suspense, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Loading } from "../components/UI";
@@ -11,6 +11,7 @@ import { getGenresList } from "../store/movieActions";
 import { getTVGenresList } from "../store/TVActions";
 import { MainLayout } from "../components/layout";
 import { MovieModal, TVShowModal, FilterModal } from "../components/Modal";
+import { useModal } from "../hooks";
 
 const SearchPage = lazy(() => import("./SearchPage"));
 const WelcomePage = lazy(() => import("./Welcome"));
@@ -23,26 +24,11 @@ const MyListPage = lazy(() => import("./MyListPage"));
 const ProfilePage = lazy(() => import("./ProfilePage"));
 
 function App() {
-  const [show, setShow] = useState(false);
-  const [currentModal, setCurrentModal] = useState();
   const wishList = useSelector((state) => state.wishList.currentUserWishList);
-  const modalList = useSelector((state) => state.modals.currentModals);
   const isChanged = useSelector((state) => state.wishList.changed);
   const ctx = useContext(AuthContext);
+  const { currentModal, hideModal, isShow } = useModal();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (modalList.length > 0) {
-      setCurrentModal(modalList[modalList.length - 1]);
-      setShow(true);
-    } else {
-      setCurrentModal(null);
-    }
-  }, [modalList, dispatch]);
-
-  const handleHideModal = () => {
-    setShow(false);
-  };
 
   useEffect(() => {
     if (isChanged) {
@@ -63,28 +49,20 @@ function App() {
 
   return (
     <>
-      {currentModal && currentModal.type === "movie" && (
-        <MovieModal
-          id={currentModal.id}
-          isShow={show}
-          onHide={handleHideModal}
-        />
+      {currentModal && currentModal?.type === "movie" && (
+        <MovieModal id={currentModal?.id} isShow={isShow} onHide={hideModal} />
       )}
-      {currentModal && currentModal.type === "tv" && (
-        <TVShowModal
-          id={currentModal.id}
-          isShow={show}
-          onHide={handleHideModal}
-        />
+      {currentModal && currentModal?.type === "tv" && (
+        <TVShowModal id={currentModal?.id} isShow={isShow} onHide={hideModal} />
       )}
-      {currentModal && currentModal.type === "filter" && (
+      {currentModal && currentModal?.type === "filter" && (
         <FilterModal
-          isShow={show}
-          filterBy={currentModal.filterBy}
-          onHide={handleHideModal}
-          id={currentModal.id}
-          mediaType={currentModal.mediaType}
-          title={currentModal.name}
+          isShow={isShow}
+          filterBy={currentModal?.filterBy}
+          onHide={hideModal}
+          id={currentModal?.id}
+          mediaType={currentModal?.mediaType}
+          title={currentModal?.name}
         />
       )}
       <Suspense fallback={<Loading />}>

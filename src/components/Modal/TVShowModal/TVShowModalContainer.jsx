@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
-import { addModal, removeModal } from "../../../store/modalSlice";
+import { addModal } from "../../../store/modalSlice";
 import classes from "./TVShowModalContainer.module.scss";
 import ModalHeader from "../ModalHeader";
 import ModalBodyWrapper from "../ModalBodyWrapper";
@@ -17,6 +17,7 @@ import { ModalWrapper } from "../../UI";
 import ModalSkeleton from "../ModalSkeleton/ModalSkeleton";
 import { SelectButton, Selection } from "../../SelectButton";
 import { EpisodesListSkeleton } from "../../Episodes/EpisodesList";
+import { useModalTransition } from "../../../hooks";
 
 const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,13 +35,10 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   const playTV = usePlayTV();
   const { addToList, isInWishList } = useWishList(id);
   const dispatch = useDispatch();
+  const { outAni, appearAni } = useModalTransition();
 
   useEffect(() => {
     dispatch(addModal({ id: id, type: "tv" }));
-
-    return () => {
-      dispatch(removeModal({ id }));
-    };
   }, []);
 
   useEffect(() => {
@@ -119,14 +117,12 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
     setCurrentSeason(data);
   };
 
-  console.log(currentTVCast?.cast);
-
   return (
     <ModalWrapper
       onTransitionEnd={onTransitionEnd}
-      style={isShow ? { animation: `appear ease .4s` } : {}}
+      style={isShow ? appearAni : {}}
       onHide={onHide}
-      className={`${classes.modalContainer} ${isShow ? "" : classes.out}`}
+      className={`${classes.modalContainer} ${isShow ? "" : outAni}`}
     >
       {isLoading && <ModalSkeleton />}
       {!isLoading && (

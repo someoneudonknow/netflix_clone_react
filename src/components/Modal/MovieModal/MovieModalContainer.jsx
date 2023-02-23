@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
-import { addModal, removeModal } from "../../../store/modalSlice";
+import { addModal } from "../../../store/modalSlice";
 import classes from "./MovieModalContainer.module.scss";
 import ModalHeader from "../ModalHeader";
 import {
@@ -14,6 +14,7 @@ import { usePlayMovie, useWishList } from "../../../hooks";
 import { ModalWrapper } from "../../UI";
 import ModalBodyWrapper from "../ModalBodyWrapper";
 import ModalSkeleton from "../ModalSkeleton/ModalSkeleton";
+import { useModalTransition } from "../../../hooks";
 
 const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,17 +41,13 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   const castArrayList = currentMovieCast?.cast?.filter(
     (cast) => cast?.known_for_department === "Acting"
   );
-
   const { addToList, isInWishList } = useWishList(id);
   const playMovie = usePlayMovie();
   const dispatch = useDispatch();
+  const { outAni, appearAni } = useModalTransition();
 
   useEffect(() => {
     dispatch(addModal({ id, type: "movie" }));
-
-    return () => {
-      dispatch(removeModal({ id }));
-    };
   }, []);
 
   useEffect(() => {
@@ -98,26 +95,26 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
     });
   };
 
-  const handleFilterByGenres = ({id, name}) => {
+  const handleFilterByGenres = ({ id, name }) => {
     dispatch(
       addModal({
         id,
         type: "filter",
         filterBy: "genre",
         mediaType: "movie",
-        name
+        name,
       })
     );
   };
 
-  const handleFilterByPeoples = ({id, name}) => {
+  const handleFilterByPeoples = ({ id, name }) => {
     dispatch(
       addModal({
         id,
         type: "filter",
         filterBy: "people",
         mediaType: "movie",
-        name
+        name,
       })
     );
   };
@@ -125,9 +122,9 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   return (
     <ModalWrapper
       onTransitionEnd={onTransitionEnd}
-      style={isShow ? { animation: `appear ease .4s` } : {}}
+      style={isShow ? appearAni : {}}
       onHide={onHide}
-      className={`${classes.modalContainer} ${isShow ? "" : classes.out}`}
+      className={`${classes.modalContainer} ${isShow ? "" : outAni}`}
     >
       {isLoading && <ModalSkeleton />}
       {!isLoading && (

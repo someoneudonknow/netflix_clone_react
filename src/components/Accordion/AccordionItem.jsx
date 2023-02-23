@@ -8,9 +8,9 @@ const AccordionItem = ({ children, title, onClick, isActive }) => {
         <h3 className={classes.title}>{title}</h3>
         <i style={isActive ? {transform: 'rotate(45deg)'} : {}} className="fa-solid fa-plus"></i>
       </button>
-      <p className={`${classes.content} ${isActive ? classes.active : ""}`}>
+      <div className={`${classes.content} ${isActive ? classes.active : ""}`}>
         {children}
-      </p>
+      </div>
     </div>
   );
 };

@@ -5,14 +5,8 @@
   overflow: hidden;
   border-radius: 1rem;
   width: 90rem;
-  transition: all ease 0.4s;
   margin-bottom: 3rem;
-
-  &.out {
-    transform: scale(0.5);
-    opacity: 0;
-    visibility: hidden;
-  }
+  transition: all ease 0.4s;
 
   .modalBody {
     .description {

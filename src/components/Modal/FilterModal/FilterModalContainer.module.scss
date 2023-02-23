@@ -11,12 +11,6 @@
   position: relative;
   padding: 10rem 0;
 
-  &.out {
-    transform: scale(0.5);
-    opacity: 0;
-    visibility: hidden;
-  }
-
   .noResultText {
     color: white;
     font-size: 4rem;

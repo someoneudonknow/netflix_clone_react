@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Spinner } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./FilterModalContainer.module.scss";
 import { ModalWrapper } from "../../UI";
 import MovieCard from "../../MovieCard/MovieCard";
@@ -10,7 +10,8 @@ import {
   getMoviesByPeoples,
   getTVShowByGenres,
 } from "../../../utils/api";
-import { removeModal, addModal } from "../../../store/modalSlice";
+import { addModal } from "../../../store/modalSlice";
+import { useModalTransition } from "../../.././hooks";
 
 const FilterModalContainer = ({
   onHide,
@@ -24,15 +25,12 @@ const FilterModalContainer = ({
   const [filteredFilms, setFilteredFilms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const { outAni, appearAni } = useModalTransition();
 
   useEffect(() => {
     dispatch(
       addModal({ id, type: "filter", filterBy, mediaType: type, name: title })
     );
-
-    return () => {
-      dispatch(removeModal({ id }));
-    };
   }, []);
 
   useEffect(() => {
@@ -63,9 +61,9 @@ const FilterModalContainer = ({
   return (
     <ModalWrapper
       onTransitionEnd={onTransitionEnd}
-      style={isShow ? { animation: `appear ease .4s` } : {}}
+      style={isShow ? appearAni : {}}
       onHide={onHide}
-      className={`${classes.modalContainer} ${isShow ? "" : classes.out}`}
+      className={`${classes.modalContainer} ${isShow ? "" : outAni}`}
     >
       {isLoading && (
         <div className={classes.spinnerWrapper}>
@@ -78,7 +76,9 @@ const FilterModalContainer = ({
             <ExitSVG />
           </div>
           <h1 className={classes.modalTitle}>{title}</h1>
-          {filteredFilms.length <= 0 && <p className={classes.noResultText}>No result</p>}
+          {filteredFilms.length <= 0 && (
+            <p className={classes.noResultText}>No result</p>
+          )}
           {filteredFilms.length > 0 && (
             <div className={classes.filmsList}>
               {filteredFilms.map((film) => (

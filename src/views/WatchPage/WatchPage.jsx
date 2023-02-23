@@ -48,7 +48,15 @@ const WatchPage = () => {
 
     return () => {
       currentModals.forEach((modal) =>
-        dispatch(addModal({ id: modal.id, type: modal.type }))
+        dispatch(
+          addModal({
+            id: modal.id,
+            type: modal.type,
+            ...(modal.filterBy && { filterBy: modal.filterBy }),
+            ...(modal.mediaType && { mediaType: modal.mediaType }),
+            ...(modal.name && { name: modal.name }),
+          })
+        )
       );
     };
   }, []);

@@ -48,6 +48,33 @@ code {
 
 $scale: 0.6;
 
+.slide-out-right {
+  transform: translateX(50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease 0.4s;
+}
+
+.slide-out {
+  transform: scale(0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all ease 0.4s;
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 @keyframes appear {
   from {
     opacity: 0;
@@ -62,8 +89,8 @@ $scale: 0.6;
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus{
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px #212529 inset;
   transition: background-color 5000s ease-in-out 0s;
