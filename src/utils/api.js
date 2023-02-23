@@ -24,7 +24,6 @@ export const getTVGenres = async () => {
   );
 
   const genresList = await response.json();
-  console.log(genresList);
 
   return genresList;
 };
@@ -201,7 +200,6 @@ export const getSimilarMovies = async (id) => {
 };
 
 //TV show
-
 export const getTVShowByGenres = async (genresId, page) => {
   const response = await fetch(
     `${process.env.REACT_APP_BASE_URL}/discover/tv?api_key=${
@@ -223,6 +221,7 @@ export const getTVShowByGenres = async (genresId, page) => {
       genresId: TVShow?.genre_ids,
     };
   });
+  
   return transformedData;
 };
 

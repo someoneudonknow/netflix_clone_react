@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { Backdrop } from "../../UI";
 import MovieModalContainer from "./MovieModalContainer";
 
@@ -33,4 +33,4 @@ const MovieModal = ({ onHide, id, isShow }) => {
   );
 };
 
-export default memo(MovieModal);
+export default MovieModal;

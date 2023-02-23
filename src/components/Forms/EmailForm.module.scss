@@ -3,7 +3,7 @@
 }
 
 .formControl {
-  height: 8rem;
+  height: 7rem;
   display: flex;
   align-items: center;
 
@@ -22,7 +22,8 @@
     outline: none;
     border-top-right-radius: $borderRad;
     border-bottom-right-radius: $borderRad;
-
+    display: flex;
+    align-items: center;
     &,
     i {
       transition: all ease 0.3s;

@@ -20,30 +20,30 @@ const LoginSignUpPage = () => {
         <WelcomeFooterLayout className={classes.loginFooter}>
           <ul className={classes.questionsList}>
             <li>
-              <a className="text-muted" href="/home">Câu hỏi thường gặp</a>
+              <a className="text-muted" href="/home">FAQ</a>
             </li>
             <li>
-              <a className="text-muted" href="/home">Trung tâm trợ giúp</a>
+              <a className="text-muted" href="/home">Help Center</a>
             </li>
             <li>
-              <a className="text-muted" href="/home">Điều khoản sử dụng</a>
+              <a className="text-muted" href="/home">Terms of Use</a>
             </li>
             <li>
-              <a className="text-muted" href="/home">Quyền riêng tư</a>
+              <a className="text-muted" href="/home">Privacy</a>
             </li>
             <li>
-              <a className="text-muted" href="/home">Tùy chọn cookie</a>
+              <a className="text-muted" href="/home">Cookie Preferences</a>
             </li>
             <li>
-              <a className="text-muted" href="/home">Thông tin doanh nghiệp</a>
+              <a className="text-muted" href="/home">Corporate Information</a>
             </li>
           </ul>
           <SelectButton className={classes.selectBtn} onSelect={handleSelect}>
-            <Selection className={classes.selection} data="en">
+            <Selection init className={classes.selection} data="en">
               {" "}
               English{" "}
             </Selection>
-            <Selection className={classes.selection} init data="vn">
+            <Selection className={classes.selection} data="vn">
               {" "}
               Tiếng Việt{" "}
             </Selection>

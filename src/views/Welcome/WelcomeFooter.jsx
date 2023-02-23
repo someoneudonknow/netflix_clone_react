@@ -2,70 +2,70 @@ import React from "react";
 import classes from "./WelcomeFooter.module.scss";
 import { SelectButton, Selection } from "../../components/SelectButton";
 import { WelcomeFooterLayout } from "../../components/layout";
-import { Link } from "react-router-dom";
 
 const WelcomeFooter = () => {
   const handleSelect = (data) => {};
+
   return (
     <WelcomeFooterLayout>
       <ul className={classes.questionsList}>
         <li>
-          <Link className="text-muted" to="/">Câu hỏi thường gặp</Link>
+          <a className="text-muted" href="/">FAQ</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Trung tâm trợ giúp</Link>
+          <a className="text-muted" href="/">Help Center</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Tài khoản</Link>
+          <a className="text-muted" href="/">Account</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Trung tâm đa phương tiện</Link>
+          <a className="text-muted" href="/">Media Center</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Quan hệ với nhà đầu tư</Link>
+          <a className="text-muted" href="/">Investor Relations</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Việc làm</Link>
+          <a className="text-muted" href="/">Jobs</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Các cách xem</Link>
+          <a className="text-muted" href="/">Ways to Watch</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Điều khoản sử dụng</Link>
+          <a className="text-muted" href="/">Terms of Use</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Quyền riêng tư</Link>
+          <a className="text-muted" href="/">Privacy</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Tùy chọn cookie</Link>
+          <a className="text-muted" href="/">Cookie Preferences</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Thông tin doanh nghiệp</Link>
+          <a className="text-muted" href="/">Corporate Information</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Liên hệ với chúng tôi</Link>
+          <a className="text-muted" href="/">Contact Us</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Kiểm tra tốc độ</Link>
+          <a className="text-muted" href="/">Speed Test</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Thông báo pháp lý</Link>
+          <a className="text-muted" href="/">Legal Notices</a>
         </li>
         <li>
-          <Link className="text-muted" to="/">Chỉ có trên Netflix</Link>
+          <a className="text-muted" href="/">Only on Netflix</a>
         </li>
       </ul>
       <SelectButton className={classes.selectBtn} onSelect={handleSelect}>
-        <Selection className={classes.selection} data="en">
+        <Selection className={classes.selection} init data="en">
           {" "}
           English{" "}
         </Selection>
-        <Selection className={classes.selection} init data="vn">
+        <Selection className={classes.selection} data="vn">
           {" "}
           Tiếng Việt{" "}
         </Selection>
       </SelectButton>
-      <p className={classes.location}>Netflix Việt Nam</p>
+      <p className={classes.location}>Netflix Viet Nam</p>
     </WelcomeFooterLayout>
   );
 };

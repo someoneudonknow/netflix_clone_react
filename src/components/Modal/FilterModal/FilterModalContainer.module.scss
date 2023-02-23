@@ -1,0 +1,67 @@
+.modalContainer {
+  transform-origin: center;
+  box-shadow: 0 0 1rem 1rem rgba(255, 255, 255, 0.01);
+  animation: appear ease 0.4s;
+  overflow: hidden;
+  border-radius: 1rem;
+  width: 80vw;
+  min-height: 90vh;
+  transition: all ease 0.4s;
+  margin-bottom: 3rem;
+  position: relative;
+  padding: 10rem 0;
+
+  &.out {
+    transform: scale(0.5);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .noResultText {
+    color: white;
+    font-size: 4rem;
+    margin-top: 15rem;
+    text-align: center;
+  }
+
+  .modalTitle {
+    text-align: center;
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+  }
+
+  .spinnerWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    & > div {
+      height: 6rem;
+      width: 6rem;
+      border-width: 0.4rem;
+    }
+  }
+
+  .closeBtn {
+    position: absolute;
+    right: 3rem;
+    top: 3rem;
+    background-color: transparent;
+
+    svg {
+      path {
+        fill: white;
+      }
+    }
+  }
+  .filmsList {
+    display: flex;
+    padding: 2rem;
+    flex-wrap: wrap;
+    .filmItem {
+      margin-right: -7rem;
+    }
+  }
+}

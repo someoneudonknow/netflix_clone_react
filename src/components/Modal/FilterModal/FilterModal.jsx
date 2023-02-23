@@ -1,8 +1,8 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { Backdrop } from "../../UI";
-import TVShowModalContainer from "./TVShowModalContainer";
+import FilterModalContainer from "./FilterModalContainer";
 
-const TVShowModal = ({ onHide, id, isShow }) => {
+const FilterModal = ({ onHide, id, isShow, filterBy, mediaType, title }) => {
   const [showModal, setShowModal] = useState(isShow);
 
   useEffect(() => {
@@ -21,11 +21,14 @@ const TVShowModal = ({ onHide, id, isShow }) => {
       {showModal && (
         <>
           <Backdrop />
-          <TVShowModalContainer
-            isShow={isShow}
+          <FilterModalContainer
             onHide={onHide}
             id={id}
+            isShow={isShow}
+            filterBy={filterBy}
+            type={mediaType}
             onTransitionEnd={handleTransitionEnd}
+            title={title}
           />
         </>
       )}
@@ -33,4 +36,4 @@ const TVShowModal = ({ onHide, id, isShow }) => {
   );
 };
 
-export default TVShowModal;
+export default FilterModal;

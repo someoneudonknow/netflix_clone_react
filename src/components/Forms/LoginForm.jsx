@@ -75,22 +75,20 @@ const LoginForm = () => {
       navigate("/vn/home/" + credentialUser.user.uid);
     } catch (error) {
       switch (error.code) {
+        case "auth/wrong-password":
+          setIsError("Wrong password");
+          break;
         case "auth/too-many-requests":
-          setIsError("Quá nhiều yêu cầu vui lòng chờ giây lát rồi thử lại");
+          setIsError("Too many requests, please try again later!");
           break;
         case "auth/user-disabled":
-          setIsError(
-            "Tài khoản đã bị vô hiệu hóa vui lòng liên hệ admin để khôi phục"
-          );
+          setIsError("Your account is disabled!");
           break;
         case "auth/user-not-found":
-          setIsError("Tài khoản không tồn tại, vui lòng tạo tài khoản mới");
-          break;
-        case "auth/wrong-password":
-          setIsError("Sai mật khẩu");
+          setIsError("Account not found");
           break;
         default:
-          setIsError("Đăng nhập thất bại vui lòng thử lại sau");
+          setIsError("Signing in failed, please try again later!");
           break;
       }
     }
@@ -117,21 +115,19 @@ const LoginForm = () => {
     } catch (error) {
       switch (error.code) {
         case "auth/too-many-requests":
-          setIsError("Quá nhiều yêu cầu vui lòng chờ giây lát rồi thử lại");
+          setIsError("Too many requests, please try again later!");
           break;
         case "auth/user-disabled":
-          setIsError(
-            "Tài khoản đã bị vô hiệu hóa vui lòng liên hệ admin để khôi phục"
-          );
+          setIsError("Your account is disabled!");
           break;
         case "auth/user-not-found":
-          setIsError("Tài khoản không tồn tại, vui lòng tạo tài khoản mới");
+          setIsError("Account not found");
           break;
         case "auth/account-exists-with-different-credential":
-          setIsError("Email đã được sử dụng ở phương thức đăng nhập khác");
+          setIsError("Account exists with different credential!");
           break;
         default:
-          setIsError("Đăng nhập thất bại vui lòng thử lại sau");
+          setIsError("Signing in failed, please try again later!");
           break;
       }
     }
@@ -158,21 +154,19 @@ const LoginForm = () => {
     } catch (error) {
       switch (error.code) {
         case "auth/too-many-requests":
-          setIsError("Quá nhiều yêu cầu vui lòng chờ giây lát rồi thử lại");
+          setIsError("Too many requests, please try again later!");
           break;
         case "auth/user-disabled":
-          setIsError(
-            "Tài khoản đã bị vô hiệu hóa vui lòng liên hệ admin để khôi phục"
-          );
+          setIsError("Your account is disabled!");
           break;
         case "auth/user-not-found":
-          setIsError("Tài khoản không tồn tại, vui lòng tạo tài khoản mới");
+          setIsError("Account not found");
           break;
         case "auth/account-exists-with-different-credential":
-          setIsError("Email đã được sử dụng ở phương thức đăng nhập khác");
+          setIsError("Account exists with different credential!");
           break;
         default:
-          setIsError("Đăng nhập thất bại vui lòng thử lại sau");
+          setIsError("Signing in failed, please try again later!");
           break;
       }
     }
@@ -185,24 +179,24 @@ const LoginForm = () => {
       className={`${classes.loadmoreBtn} ${classes.linkBtn}`}
     >
       {" "}
-      Tìm hiểu thêm
+      Learn more.
     </span>
   );
 
   const infoText = (
     <p className={`${classes.infoText} text-muted`}>
-      Thông tin do Google reCAPTCHA thu thập sẽ tuân theo{" "}
-      <span className={classes.linkBtn}>Chính sách Quyền riêng tư</span> và
-      <span className={classes.linkBtn}> Điều khoản dịch vụ </span>của Google,
-      và được dùng để cung cấp, duy trì và cải thiện dịch vụ reCAPTCHA cũng như
-      các mục đích bảo mật nói chung (thông tin này không được dùng để cá nhân
-      hóa quảng cáo của Google).
+      The information collected by Google reCAPTCHA is subject to the Google{" "}
+      <span className={classes.linkBtn}>Privacy Policy</span> and
+      <span className={classes.linkBtn}> Terms of Service </span>, and is used
+      for providing, maintaining, and improving the reCAPTCHA service and for
+      general security purposes (it is not used for personalized advertising by
+      Google).
     </p>
   );
 
   return (
     <FormWrapper className={classes.loginForm}>
-      <h1 className="h1 text-light mb-5">Đăng nhập</h1>
+      <h1 className="h1 text-light mb-5">Sign In</h1>
       <form>
         {isError && (
           <Alert style={{ fontSize: "1.7rem" }} variant="danger">
@@ -226,11 +220,11 @@ const LoginForm = () => {
             type="text"
             id="email"
           />
-          <label htmlFor="email">Nhập email hoặc số điện thoại</label>
+          <label htmlFor="email">Email or phone number</label>
           <small className={classes.errorMessage}>
-            {errors.email?.type === "required" && "Vui lòng nhập email"}
+            {errors.email?.type === "required" && "Email is required!"}
             {errors.email?.type === "pattern" &&
-              "Vui lòng nhập đúng định dạng email"}
+              "Please enter a valid email address"}
           </small>
         </div>
         <div
@@ -257,16 +251,16 @@ const LoginForm = () => {
               type="button"
               className={`${classes.showHideBtn} text-light h3 h-100`}
             >
-              {togglePassword ? "Ẩn" : "Hiện"}
+              {togglePassword ? "SHOW" : "HIDE"}
             </button>
           )}
-          <label htmlFor="password">Mật khẩu</label>
+          <label htmlFor="password">Password</label>
           <small className={classes.errorMessage}>
-            {errors.password?.type === "required" && "Vui lòng nhập mật khẩu"}
+            {errors.password?.type === "required" && "Password is required!"}
             {errors.password?.type === "minLength" &&
-              "Vui lòng nhập mật khẩu lớn hơn 4 ký tự và bé hơn 60 kì tự"}
+              "Please enter password greater than 4 characters and less than 60 characters!"}
             {errors.password?.type === "maxLength" &&
-              "Vui lòng nhập mật khẩu lớn hơn 4 ký tự và bé hơn 60 kì tự"}
+              "Please enter password greater than 4 characters and less than 60 characters"}
           </small>
         </div>
         <ButtonGroup vertical className="w-100 mt-5">
@@ -278,7 +272,7 @@ const LoginForm = () => {
             className={`w-100 rounded mb-4 ${classes.loginBtn}`}
           >
             {isLoading && <Spinner animation="border" />}
-            {!isLoading && "Đăng nhập"}
+            {!isLoading && "Sign In"}
           </Button>
           <Button
             disabled={isLoading}
@@ -286,7 +280,7 @@ const LoginForm = () => {
             className={`w-100 rounded mb-4 ${classes.loginBtn}`}
             onClick={onLoginWithFacebook}
           >
-            <span>Đăng nhập với facebook</span>{" "}
+            <span>Sign in with facebook</span>{" "}
             <i className="ms-3 fa-brands fa-facebook"></i>
           </Button>
           <Button
@@ -295,7 +289,7 @@ const LoginForm = () => {
             variant="outline-light"
             className={`w-100 rounded mb-4 ${classes.loginBtn}`}
           >
-            <span>Đăng nhập với google</span>{" "}
+            <span>Sign in with google</span>{" "}
             <i className="ms-3 fa-brands fa-google"></i>
           </Button>
         </ButtonGroup>
@@ -306,14 +300,13 @@ const LoginForm = () => {
         }`}
       >
         <h3 className={`text-muted`}>
-          Bạn mới tham gia Netflix?{" "}
+          New to Netflix?{" "}
           <Link className="text-light" to="/vn/login_register/register">
-            Đăng ký ngay
+            Sign up now
           </Link>
         </h3>
         <p className={`text-muted`}>
-          Trang này được Google reCAPTCHA bảo vệ để đảm bảo bạn không phải là
-          robot.
+          This page is protected by Google reCAPTCHA to ensure you're not a bot.
           {!showText && loadMoreButton}
         </p>
         {infoText}

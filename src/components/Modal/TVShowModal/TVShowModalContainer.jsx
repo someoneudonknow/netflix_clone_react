@@ -91,18 +91,35 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
     });
   };
 
-  const handleFilterByGenres = (genresId) => {
-    console.log("genres");
-    console.log(genresId);
+  const handleFilterByGenres = ({ id, name }) => {
+    dispatch(
+      addModal({
+        id: id,
+        type: "filter",
+        filterBy: "genre",
+        mediaType: "tv",
+        name,
+      })
+    );
   };
-  const handleFilterByPeoples = (peoplesId) => {
-    console.log("peoples");
-    console.log(peoplesId);
+
+  const handleFilterByPeoples = ({ id, name }) => {
+    dispatch(
+      addModal({
+        id: id,
+        type: "filter",
+        filterBy: "people",
+        mediaType: "tv",
+        name,
+      })
+    );
   };
 
   const handleSeasonChange = (data) => {
     setCurrentSeason(data);
   };
+
+  console.log(currentTVCast?.cast);
 
   return (
     <ModalWrapper
@@ -120,7 +137,7 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
             posterURL={currentTVShow.posterURL}
             onHide={onHide}
             onAddToWishList={handleAddToWishList}
-            type="movie"
+            type="tv"
             isAdd={isInWishList}
           />
           <ModalBodyWrapper className={classes.modalBody}>
@@ -128,7 +145,6 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
               <div className={classes.descLeft}>
                 <div className={classes.yearAndAge}>
                   <span className={classes.year}>{releaseYear}</span>
-                  {/* {isAdult && <span className={classes.adult}>18+</span>} */}
                 </div>
                 <p className={classes.overview}>{currentTVShow?.overview}</p>
               </div>
@@ -140,7 +156,10 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                       {currentTVCast?.cast?.slice(0, 3).map((item) => (
                         <span
                           onClick={() => {
-                            handleFilterByPeoples(item?.id);
+                            handleFilterByPeoples({
+                              id: item?.id,
+                              name: item.name || item.original_name,
+                            });
                           }}
                           key={item?.id}
                         >
@@ -162,7 +181,10 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                       {currentTVShow?.genres?.map((genre, i) => (
                         <span
                           onClick={() => {
-                            handleFilterByGenres(genre.id);
+                            handleFilterByGenres({
+                              id: genre?.id,
+                              name: genre?.name,
+                            });
                           }}
                           key={genre.id}
                         >
@@ -231,7 +253,10 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                     {creatorsArrayList?.map((creator, i) => (
                       <span
                         onClick={() => {
-                          handleFilterByPeoples(creator.id);
+                          handleFilterByPeoples({
+                            id: creator?.id,
+                            name: creator.name || creator.original_name,
+                          });
                         }}
                         key={creator.id}
                       >
@@ -249,7 +274,10 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                     {currentTVCast?.cast?.map((cast, i) => (
                       <span
                         onClick={() => {
-                          handleFilterByPeoples(cast.id);
+                          handleFilterByPeoples({
+                            id: cast?.id,
+                            name: cast.name || cast.original_name,
+                          });
                         }}
                         key={cast.id}
                       >
@@ -267,7 +295,10 @@ const TVShowModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                     {currentTVShow?.genres?.map((genre, i) => (
                       <span
                         onClick={() => {
-                          handleFilterByGenres(genre.id);
+                          handleFilterByGenres({
+                            id: genre?.id,
+                            name: genre?.name,
+                          });
                         }}
                         key={genre.id}
                       >

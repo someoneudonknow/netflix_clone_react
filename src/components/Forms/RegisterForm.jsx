@@ -106,13 +106,13 @@ const RegisterForm = () => {
     } catch (error) {
       switch (error.code) {
         case "auth/too-many-requests":
-          setIsError("Quá nhiều yêu cầu vui lòng chờ giây lát rồi thử lại");
+          setIsError("Too many requests, please try again later!");
           break;
         case "auth/email-already-in-use":
-          setIsError("Email đã được sử dụng");
+          setIsError("Email already in use!");
           break;
         default:
-          setIsError("Tạo tài khoản thất bại vui lòng thử lại sau");
+          setIsError("Sign up failed, please try again later!");
           break;
       }
     }
@@ -121,7 +121,7 @@ const RegisterForm = () => {
 
   return (
     <FormWrapper className={classes.loginForm}>
-      <h1 className="h1 text-light mb-5">Đăng kí</h1>
+      <h1 className="h1 text-light mb-5">Sign up</h1>
       <form onSubmit={handleSubmit(onSubmitForm)}>
         {isError && (
           <Alert style={{ fontSize: "1.7rem" }} variant="danger">
@@ -145,11 +145,11 @@ const RegisterForm = () => {
             type="text"
             id="email"
           />
-          <label htmlFor="email">Nhập email</label>
+          <label htmlFor="email">Enter email</label>
           <small className={classes.errorMessage}>
-            {errors.email?.type === "required" && "Vui lòng nhập email"}
+            {errors.email?.type === "required" && "Email is required!"}
             {errors.email?.type === "pattern" &&
-              "Vui lòng nhập đúng định dạng email"}
+              "Please enter a valid email address!"}
           </small>
         </div>
         <div
@@ -176,16 +176,16 @@ const RegisterForm = () => {
               type="button"
               class={`${classes.showHideBtn} text-light h3 h-100`}
             >
-              {isPasswordShow ? "Ẩn" : "Hiện"}
+              {isPasswordShow ? "SHOW" : "HIDE"}
             </button>
           )}
           <label htmlFor="password">Mật khẩu</label>
           <small className={classes.errorMessage}>
-            {errors.password?.type === "required" && "Vui lòng nhập mật khẩu"}
+            {errors.password?.type === "required" && "Password is required!"}
             {errors.password?.type === "minLength" &&
-              "Vui lòng nhập mật khẩu lớn hơn 4 ký tự và bé hơn 60 kí tự"}
+              "Please enter password greater than 4 characters and less than 60 characters!"}
             {errors.password?.type === "maxLength" &&
-              "Vui lòng nhập mật khẩu lớn hơn 4 ký tự và bé hơn 60 kí tự"}
+              "Please enter password greater than 4 characters and less than 60 characters!"}
           </small>
         </div>
         <div
@@ -214,15 +214,15 @@ const RegisterForm = () => {
               type="button"
               class={`${classes.showHideBtn} text-light h3 h-100`}
             >
-              {isPasswordConfirmShow ? "Ẩn" : "Hiện"}
+              {isPasswordConfirmShow ? "SHOW" : "HIDE"}
             </button>
           )}
-          <label htmlFor="passwordConfirmation">Xác nhận mật khẩu</label>
+          <label htmlFor="passwordConfirmation">Password confirm</label>
           <small className={classes.errorMessage}>
             {errors.passwordConfirmation?.type === "required" &&
-              "Vui xác nhận mật khẩu"}
+              "Password confirm is required!"}
             {errors.passwordConfirmation?.type === "validate" &&
-              "Mật khẩu xác nhận sai"}
+              "Wrong password confirmation!"}
           </small>
         </div>
         <ButtonGroup vertical className="w-100 mt-3">
@@ -233,14 +233,14 @@ const RegisterForm = () => {
             className={`w-100 rounded mb-4 ${classes.loginBtn}`}
           >
             {isLoading && <Spinner animation="border" />}
-            {!isLoading && "Đăng kí"}
+            {!isLoading && "Sign up"}
           </Button>
         </ButtonGroup>
         <p className="h3 text-light">
-          Đã có tài khoản
+          Have an account?
           <Link to="/vn/login_register/login" className="text-decoration-none">
             {" "}
-            Đăng nhập
+            Sign in
           </Link>
         </p>
       </form>

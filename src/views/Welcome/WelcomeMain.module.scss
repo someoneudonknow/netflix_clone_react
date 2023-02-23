@@ -3,14 +3,14 @@
   text-align: left;
   margin-right: 5rem;
   h1 {
-    font-size: 6rem;
+    font-size: 5rem;
     line-height: 1;
     font-weight: 600;
   }
 
   h3 {
     margin-top: 2rem;
-    font-size: 2.7rem;
+    font-size: 2.6rem;
     font-weight: 500;
     margin-bottom: 2rem;
   }
@@ -103,6 +103,11 @@
   }
 }
 
+.accordionText {
+  font-size: 2.4rem;
+  word-spacing: -0.2rem;
+  line-height: 1.3;
+}
 
 .contactAndInfo{
     margin: auto;
@@ -121,7 +126,7 @@
         text-align: center;
         margin-top: 5rem;
         margin-bottom: 3rem;
-        font-size: 2.3rem;
+        font-size: 2rem;
     }
 }
 

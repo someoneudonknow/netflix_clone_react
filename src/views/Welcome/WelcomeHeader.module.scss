@@ -32,22 +32,23 @@
   color: var(--white-color);
 
   h1 {
-    font-size: 7.5rem;
-    max-width: 100rem;
+    font-size: 6.5rem;
     text-align: center;
     font-weight: 500;
     line-height: 1.1;
+    word-spacing: -0.5rem;
+    font-weight: 600;
   }
 
   h3 {
-    font-size: 3.2rem;
+    font-size: 2.8rem;
     font-weight: 400;
     margin: 2rem 0;
     word-spacing: 0.1rem;
   }
 
   .subCap {
-    font-size: 2.3rem;
+    font-size: 2rem;
     margin-bottom: 2rem;
     word-spacing: 0.001rem;
   }

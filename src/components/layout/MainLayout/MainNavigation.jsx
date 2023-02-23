@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import classes from "./MainNavigation.module.scss";
-import demoImage from "../../../assets/images/demoNotifiImage.png";
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
 import { Wrapper } from "../../UI";

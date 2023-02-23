@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-console.log(JSON.parse(window.sessionStorage.getItem("modals")))
-
 const init = {
   currentModals: JSON.parse(window.sessionStorage.getItem("modals")) || [],
 };
@@ -16,7 +14,16 @@ const modalSlice = createSlice({
       const isExistId = state.currentModals.find((d) => d.id == id);
 
       if (!isExistId) {
-        state.currentModals.push({ id, type });
+        state.currentModals = [
+          ...state.currentModals,
+          {
+            id,
+            type,
+            ...(payload.filterBy && { filterBy: payload.filterBy }),
+            ...(payload.mediaType && { mediaType: payload.mediaType }),
+            ...(payload.name && { name: payload.name }),
+          },
+        ];
       } else {
         const existTaken = state.currentModals.splice(
           state.currentModals.findIndex((d) => d.id === id),
@@ -44,7 +51,7 @@ const modalSlice = createSlice({
         "modals",
         JSON.stringify(state.currentModals)
       );
-    }
+    },
   },
 });
 

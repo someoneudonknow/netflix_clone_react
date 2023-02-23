@@ -10,7 +10,7 @@ import { getWishList, updateList } from "../store/wishListActions";
 import { getGenresList } from "../store/movieActions";
 import { getTVGenresList } from "../store/TVActions";
 import { MainLayout } from "../components/layout";
-import { MovieModal, TVShowModal } from "../components/Modal";
+import { MovieModal, TVShowModal, FilterModal } from "../components/Modal";
 
 const SearchPage = lazy(() => import("./SearchPage"));
 const WelcomePage = lazy(() => import("./Welcome"));
@@ -75,6 +75,16 @@ function App() {
           id={currentModal.id}
           isShow={show}
           onHide={handleHideModal}
+        />
+      )}
+      {currentModal && currentModal.type === "filter" && (
+        <FilterModal
+          isShow={show}
+          filterBy={currentModal.filterBy}
+          onHide={handleHideModal}
+          id={currentModal.id}
+          mediaType={currentModal.mediaType}
+          title={currentModal.name}
         />
       )}
       <Suspense fallback={<Loading />}>

@@ -98,13 +98,28 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
     });
   };
 
-  const handleFilterByGenres = (genresId) => {
-    console.log("genres");
-    console.log(genresId);
+  const handleFilterByGenres = ({id, name}) => {
+    dispatch(
+      addModal({
+        id,
+        type: "filter",
+        filterBy: "genre",
+        mediaType: "movie",
+        name
+      })
+    );
   };
-  const handleFilterByPeoples = (peoplesId) => {
-    console.log("peoples");
-    console.log(peoplesId);
+
+  const handleFilterByPeoples = ({id, name}) => {
+    dispatch(
+      addModal({
+        id,
+        type: "filter",
+        filterBy: "people",
+        mediaType: "movie",
+        name
+      })
+    );
   };
 
   return (
@@ -143,7 +158,10 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                       {castArrayList?.slice(0, 3).map((item) => (
                         <span
                           onClick={() => {
-                            handleFilterByPeoples(item?.id);
+                            handleFilterByPeoples({
+                              id: item?.id,
+                              name: item?.name || item?.original_name,
+                            });
                           }}
                           key={item?.id}
                         >
@@ -165,7 +183,10 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                       {currentMovie?.genres?.map((genre, i) => (
                         <span
                           onClick={() => {
-                            handleFilterByGenres(genre.id);
+                            handleFilterByGenres({
+                              id: genre?.id,
+                              name: genre?.name,
+                            });
                           }}
                           key={genre.id}
                         >
@@ -208,7 +229,10 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                     {creatorsArrayList?.map((creator, i) => (
                       <span
                         onClick={() => {
-                          handleFilterByPeoples(creator.id);
+                          handleFilterByPeoples({
+                            id: creator?.id,
+                            name: creator?.name || creator?.original_name,
+                          });
                         }}
                         key={creator.id}
                       >
@@ -226,7 +250,10 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                     {castArrayList?.map((cast, i) => (
                       <span
                         onClick={() => {
-                          handleFilterByPeoples(cast.id);
+                          handleFilterByPeoples({
+                            id: cast.id,
+                            name: cast?.name || cast?.original_name,
+                          });
                         }}
                         key={cast.id}
                       >
@@ -244,7 +271,10 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
                     {currentMovie?.genres?.map((genre, i) => (
                       <span
                         onClick={() => {
-                          handleFilterByGenres(genre.id);
+                          handleFilterByGenres({
+                            id: genre?.id,
+                            name: genre?.name,
+                          });
                         }}
                         key={genre.id}
                       >

@@ -16,8 +16,8 @@ const EmailForm = ({ onSubmit }) => {
   const isFormValid = isInputValid && isEmailValid;
 
   const labelStyle = {
-    fontSize: isFocused ? "1.5rem" : "2.2rem",
-    transform: isFocused ? "translateY(0)" : "translateY(1.3rem)",
+    fontSize: isFocused ? "1.5rem" : "2.1rem",
+    transform: isFocused ? "translateY(0)" : "translateY(0.9rem)",
     fontWeight: isFocused ? "bold" : "normal",
   };
 
@@ -54,7 +54,7 @@ const EmailForm = ({ onSubmit }) => {
       <div className={classes.formControl}>
         <div className={classes.inputWrapper}>
           <label style={labelStyle} htmlFor={inputId}>
-            Địa chỉ email
+            Email address
           </label>
           <input
             id={inputId}
@@ -67,15 +67,15 @@ const EmailForm = ({ onSubmit }) => {
           />
         </div>
         <button type="submit">
-          <span>Bắt đầu</span>
+          <span>Get Started</span>
           <i className="fa-solid fa-chevron-right"></i>
         </button>
       </div>
       {isInputInvalid && (
-        <p className={classes.errorMessage}>Bạn cần nhập email!</p>
+        <p className={classes.errorMessage}>Email is required!</p>
       )}
       {!isInputInvalid && isEmailInvalid && (
-        <p className={classes.errorMessage}>Email không hợp lệ</p>
+        <p className={classes.errorMessage}>Please enter a valid email address!</p>
       )}
     </form>
   );

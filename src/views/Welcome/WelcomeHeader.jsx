@@ -15,34 +15,28 @@ const WelcomeHeader = () => {
 
   const handleSubcribes = (value) => {
     navigate("/vn/login_register/login", {
-      state: {email: value?.toString()}
+      state: { email: value?.toString() },
     });
   };
   return (
     <BackgroundImage src={welcomeImage}>
       <div className={classes.actions}>
         <SelectButton onSelect={handleSelectLanguage}>
-          <Selection data="en"> English </Selection>
-          <Selection init data="vn">
+          <Selection init data="en"> English </Selection>
+          <Selection data="vn">
             Tiếng Việt
           </Selection>
         </SelectButton>
-        <Link
-          to="/vn/login_register/login"
-          className={classes.loginBtn}
-        >
-          Đăng nhập
+        <Link to="/vn/login_register/login" className={classes.loginBtn}>
+          Sign in
         </Link>
       </div>
 
       <div className={classes.content}>
-        <h1>
-          Chương trình truyền hình, phim không giới hạn và nhiều nội dung khác.
-        </h1>
-        <h3>Xem ở mọi nơi. Hủy bất kỳ lúc nào.</h3>
+        <h1>Unlimited movies, TV <br/> shows, and more.</h1>
+        <h3>Watch anywhere. Cancel anytime.</h3>
         <p className={classes.subCap}>
-          Bạn đã sẵn sàng xem chưa? Nhập email để tạo hoặc kích hoạt lại tư cách
-          thành viên của bạn.
+          Ready to watch? Enter your email to create or restart your membership.
         </p>
         <EmailForm onSubmit={handleSubcribes} />
       </div>

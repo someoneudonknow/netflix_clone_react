@@ -30,50 +30,49 @@ const MainFooter = () => {
         <div className={classes.contactInfo}>
           <ul>
             <li>
-              <a href="#">Mô tả âm thanh</a>
+              <a href="#">Audio Description</a>
             </li>
             <li>
-              <a href="#">Trung tâm trợ giúp</a>
+              <a href="#">Help Center</a>
             </li>
             <li>
-              <a href="#">Thẻ quà tặng</a>
+              <a href="#">Gift Cards</a>
             </li>
             <li>
-              <a href="#">Trung tâm đa phương tiện</a>
+              <a href="#">Media Center</a>
             </li>
             <li>
-              <a href="#">Quan hệ với nhà đầu tư</a>
+              <a href="#">Investor Relations</a>
             </li>
             <li>
-              <a href="#">Việc làm</a>
+              <a href="#">Jobs</a>
             </li>
             <li>
-              <a href="#">Điều khoản sử dụng</a>
+              <a href="#">Terms of Use</a>
             </li>
             <li>
-              <a href="#">Quyền riêng tư</a>
+              <a href="#">Privacy</a>
             </li>
             <li>
-              <a href="#">Thông báo pháp lý</a>
+              <a href="#">Legal Notices</a>
             </li>
             <li>
-              <a href="#">Tùy chọn cookie</a>
+              <a href="#">Cookie Preferences</a>
             </li>
             <li>
-              <a href="#">Thông tin doanh nghiệp</a>
+              <a href="#">Corporate Information</a>
             </li>
             <li>
-              <a href="#">Liên hệ với chúng tôi</a>
+              <a href="#">Contact Us</a>
             </li>
           </ul>
         </div>
         <div className={classes.serviceCode}>
-          <span>Mã Dịch vụ</span>
+          <span>Service Code</span>
         </div>
         <div className={classes.copyright}>
           <p>
             © 1997-2022 Netflix, Inc.{" "}
-            <span>2c931268-7254-48b0-a030-30002eb80847</span>
           </p>
         </div>
       </div>

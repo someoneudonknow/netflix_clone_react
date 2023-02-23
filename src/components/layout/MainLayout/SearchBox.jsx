@@ -35,7 +35,6 @@ const SearchBox = () => {
     setEnteredSearchBox(e.target.value);
     if (e.target.value !== "" && firstType.current <= 1) {
       navigate(`/vn/search?q=${e.target.value}`);
-      inputRef.focus()
       window.sessionStorage.setItem("lastPage", location.pathname);
     }
   };
