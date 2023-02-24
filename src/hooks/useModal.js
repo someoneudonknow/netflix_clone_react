@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { removeModal } from "../store/modalSlice";
+import { removeModal, removeAllModals } from "../store/modalSlice";
 
 const useModal = () => {
   const [show, setShow] = useState(false);
@@ -22,7 +22,7 @@ const useModal = () => {
     if (!show && modalList.length > 0 && currentModal?.id) {
       timer = setTimeout(() => {
         dispatch(removeModal({ id: currentModal?.id }));
-      }, 500);
+      }, 450);
     }
     return () => {
       if(timer) {
@@ -35,10 +35,15 @@ const useModal = () => {
     setShow(false);
   };
 
+  const hidaAllModals = () => {
+    dispatch(removeAllModals());
+  }
+
   return {
     currentModal,
     hideModal: handleHideModal,
     isShow: show,
+    hideAllModals: hidaAllModals,
   };
 };
 

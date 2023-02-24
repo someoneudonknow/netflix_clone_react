@@ -47,7 +47,7 @@ const MovieModalContainer = ({ onHide, id, isShow, onTransitionEnd }) => {
   const { outAni, appearAni } = useModalTransition();
 
   useEffect(() => {
-    dispatch(addModal({ id, type: "movie" }));
+    dispatch(addModal({ id, type: "movie"}));
   }, []);
 
   useEffect(() => {

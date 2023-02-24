@@ -43,6 +43,9 @@
   }
 
   .slideItem {
+    .card {
+      width: 100%;
+    }
     &:hover {
       z-index: 1000;
     }

@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./FilterModalContainer.module.scss";
 import { ModalWrapper } from "../../UI";
 import MovieCard from "../../MovieCard/MovieCard";
-import { ExitSVG } from "../../SVG";
+import { ExitSVG, ArrowLeftSVG } from "../../SVG";
 import {
   getMoviesByGenres,
   getMoviesByPeoples,
   getTVShowByGenres,
 } from "../../../utils/api";
 import { addModal } from "../../../store/modalSlice";
-import { useModalTransition } from "../../.././hooks";
+import { useModalTransition, useModal } from "../../.././hooks";
 
 const FilterModalContainer = ({
   onHide,
@@ -26,6 +26,8 @@ const FilterModalContainer = ({
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const { outAni, appearAni } = useModalTransition();
+  const modals = useSelector((state) => state.modals.currentModals);
+  const { hideAllModals } = useModal();
 
   useEffect(() => {
     dispatch(
@@ -72,9 +74,20 @@ const FilterModalContainer = ({
       )}
       {!isLoading && (
         <>
-          <div onClick={onHide} className={classes.closeBtn}>
+          <div
+            onClick={hideAllModals}
+            className={`${classes.navigateModalBtn} ${classes.closeBtn}`}
+          >
             <ExitSVG />
           </div>
+          {modals?.length > 1 && (
+            <div
+              onClick={onHide}
+              className={`${classes.navigateModalBtn} ${classes.backBtn}`}
+            >
+              <ArrowLeftSVG />
+            </div>
+          )}
           <h1 className={classes.modalTitle}>{title}</h1>
           {filteredFilms.length <= 0 && (
             <p className={classes.noResultText}>No result</p>

@@ -11,7 +11,7 @@ import "swiper/scss/pagination";
 const MovieCardSlider = ({ title, movieList, tv }, ref) => {
   const swiperRef = useRef();
 
-  if(movieList?.length <= 0) {
+  if (movieList?.length <= 0) {
     return;
   }
 
@@ -29,8 +29,33 @@ const MovieCardSlider = ({ title, movieList, tv }, ref) => {
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
+        breakpoints={{
+          576: {
+            width: 500,
+            slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+          992: {
+            slidesPerView: 4,
+          },
+          1200: {
+            spaceBetween: 2,
+            slidesPerView: 5,
+          },
+          1400: {
+            slidesPerView: 6,
+          },
+          1700: {
+            slidesPerView: 7,
+          },
+          1900: {
+            slidesPerView: 8,
+          },
+        }}
       >
-        <button 
+        <button
           className={classes.actionPrev}
           onClick={() => swiperRef.current?.slidePrev()}
         >
@@ -40,7 +65,7 @@ const MovieCardSlider = ({ title, movieList, tv }, ref) => {
           return (
             <SwiperSlide key={movie?.id} className={classes.slideItem}>
               <MovieCard
-                type={tv ? 'tv' : 'movie'}
+                type={tv ? "tv" : "movie"}
                 className={classes.card}
                 posterURL={movie?.posterURL}
                 movieName={movie.title}

@@ -38,18 +38,28 @@
     }
   }
 
-  .closeBtn {
+  .navigateModalBtn {
     position: absolute;
-    right: 3rem;
     top: 3rem;
     background-color: transparent;
+    cursor: pointer;
 
     svg {
+      outline: none;
       path {
         fill: white;
       }
     }
   }
+
+  .closeBtn {
+    right: 3rem;
+  }
+
+  .backBtn {
+    left: 3rem;
+  }
+
   .filmsList {
     display: flex;
     padding: 2rem;

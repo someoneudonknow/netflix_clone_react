@@ -4,9 +4,8 @@
   position: relative;
   background-image: linear-gradient(to top, #181818 5%, transparent 50%);
 
-  .closeBtn {
+  .navigateModalBtn {
     position: absolute;
-    right: 2rem;
     top: 2rem;
     background-color: #181818;
     border-color: #181818;
@@ -14,6 +13,15 @@
     svg {
       outline: none;
     }
+  }
+
+  .closeBtn {
+    right: 2rem;
+   
+  }
+
+  .backBtn {
+    left: 2rem;
   }
 
   .headerContent {

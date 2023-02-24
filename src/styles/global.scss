@@ -49,7 +49,7 @@ code {
 $scale: 0.6;
 
 .slide-out-right {
-  transform: translateX(50%);
+  transform: translateX(-50%);
   opacity: 0;
   visibility: hidden;
   transition: all ease 0.4s;
@@ -64,7 +64,7 @@ $scale: 0.6;
 
 @keyframes slide-in-left {
   from {
-    transform: translateX(-50%);
+    transform: translateX(50%);
     opacity: 0;
     visibility: hidden;
   }
