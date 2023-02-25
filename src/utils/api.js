@@ -313,7 +313,7 @@ export const getSearchResults = async (q, page = 1, adult = false) => {
   const response = await fetch(
     `${process.env.REACT_APP_BASE_URL}/search/multi?api_key=${
       process.env.REACT_APP_API_KEY
-    }&query=${encodeURIComponent(q)}&page=${page}&include_adult=${!!adult}`
+    }&query=${encodeURIComponent(q)}&page=${page}&include_adult=${false}`
   );
 
   const results = await response.json();

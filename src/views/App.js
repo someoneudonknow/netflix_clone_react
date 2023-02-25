@@ -1,4 +1,3 @@
-import "./App.scss";
 import { lazy, Suspense, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
@@ -83,6 +82,7 @@ function App() {
           >
             <Route
               path="home/:userId"
+              index
               element={
                 <PrivateRoute>
                   <HomePage />

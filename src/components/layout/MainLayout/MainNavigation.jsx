@@ -14,9 +14,9 @@ const MainNavigation = () => {
   const [showNavBackground, setShowNavBackground] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
-  const userId = currentUser.uid;
-  const userName = currentUser.displayName || currentUser.email;
-  const avatarSrc = currentUser.photoURL || avatar;
+  const userId = currentUser?.uid;
+  const userName = currentUser?.displayName || currentUser?.email;
+  const avatarSrc = currentUser?.photoURL || avatar;
 
   useEffect(() => {
     const handleShowBackground = () => {

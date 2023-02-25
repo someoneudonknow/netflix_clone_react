@@ -251,7 +251,7 @@ const LoginForm = () => {
               type="button"
               className={`${classes.showHideBtn} text-light h3 h-100`}
             >
-              {togglePassword ? "SHOW" : "HIDE"}
+              {togglePassword ? "HIDE" : "SHOW"}
             </button>
           )}
           <label htmlFor="password">Password</label>

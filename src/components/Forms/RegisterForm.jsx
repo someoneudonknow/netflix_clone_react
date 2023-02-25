@@ -167,7 +167,7 @@ const RegisterForm = () => {
             name="password"
             onFocus={handlePasswordFocus}
             className="text-bg-dark rounded"
-            type={isPasswordShow ? "text" : "password"}
+            type={isPasswordShow ? "password" : "text"}
             id="password"
           />
           {isPasswordFocused && (
@@ -214,7 +214,7 @@ const RegisterForm = () => {
               type="button"
               class={`${classes.showHideBtn} text-light h3 h-100`}
             >
-              {isPasswordConfirmShow ? "SHOW" : "HIDE"}
+              {isPasswordConfirmShow ? "HIDE" : "SHOW"}
             </button>
           )}
           <label htmlFor="passwordConfirmation">Password confirm</label>

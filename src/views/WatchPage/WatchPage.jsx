@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addModal, removeModal, removeAllModals } from "../../store/modalSlice";
+import { addModal, removeAllModals } from "../../store/modalSlice";
 import classes from "./WatchPage.module.scss";
 import Skeleton from "react-loading-skeleton";
+import netflixLogo from "../.././assets/images/netflix_logo.png"
+import { AuthContext } from "../../store/Auth/AuthProvider";
 
 const WatchPageSkeleton = () => {
   return (
@@ -24,18 +26,18 @@ const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const isMovie = searchParams.get("isMovie");
   let url;
+  const ctx = useContext(AuthContext);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  if (isMovie === "true") {
-    const movieId = searchParams.get("id");
-    url = `${process.env.REACT_APP_WATCH_BASE_URL}${movieId}`;
+  const id = searchParams.get("id");
+  if (isMovie === "true") { 
+    url = `${process.env.REACT_APP_WATCH_BASE_URL}${id}`;
   } else {
-    const tvId = searchParams.get("id");
     const s = searchParams.get("s");
     const e = searchParams.get("e");
 
-    url = `${process.env.REACT_APP_WATCH_TV_BASE_URL}${tvId}&s=${s}&e=${e}`;
+    url = `${process.env.REACT_APP_WATCH_TV_BASE_URL}${id}&s=${s}&e=${e}`;
   }
 
   const handleIFrameLoad = (e) => {
@@ -62,7 +64,7 @@ const WatchPage = () => {
   }, []);
 
   const handleGoback = () => {
-    navigate(-1);
+    navigate(`/vn/home/${ctx?.currentUser?.uid}`);
   };
 
   return (
@@ -70,7 +72,7 @@ const WatchPage = () => {
       {isLoading && <WatchPageSkeleton />}
       <nav className={classes.navBar}>
         <button onClick={handleGoback} className={classes.goBackBtn}>
-          <i className="fa-solid fa-arrow-left"></i>
+          <img src={netflixLogo} alt="page-logo"/>
         </button>
       </nav>
       <div className={classes.wrapper}>
