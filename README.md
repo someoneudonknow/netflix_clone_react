@@ -18,8 +18,4 @@ My Netflix clone web app is an excellent tool for anyone who is interested in im
 - Data is taken from [tmdb](https://www.themoviedb.org/) and [2embed](https://2embed.org/)
 - Support libraries: react hook form, swipperjs, react-bootstrap
 
-## Interface
-##### Movie Page:
-![screencapture-localhost-3000-vn-home-1vqLegEQ39gLifFyQAbEFdCukeu1-2023-02-25-21_40_03](https://user-images.githubusercontent.com/90843926/221363179-e66e61d2-4890-4e7b-98fd-fc3afffb5ce6.png)
-
-- [Demo](https://react-authentication-cb1e5.web.app)
+#### Live Demo Here: (https://react-authentication-cb1e5.web.app)
