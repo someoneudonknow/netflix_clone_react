@@ -1,6 +1,6 @@
 ## Introduction
 
-Introducing my Netflix clone web app, a project that I have developed for learning purposes. This web app is mainly built with ReactJS and other tools. It is designed to provide users with a user-friendly and engaging experience while also improving my front-end development skills. It is designed to be user-friendly and engaging, with features that allow users to quickly and easily find their favorite movies or TV shows, add their favorite film to a list, customize their profile, and more. It is also fast and efficient, with API calls on scroll and debounce search to improve browsing speed.
+- Introducing my Netflix clone web app, a project that I have developed for learning purposes. This web app is mainly built with ReactJS and other tools. It is designed to provide users with a user-friendly and engaging experience while also improving my front-end development skills. It is designed to be user-friendly and engaging, with features that allow users to quickly and easily find their favorite movies or TV shows, add their favorite film to a list, customize their profile, and more. It is also fast and efficient, with API calls on scroll and debounce search to improve browsing speed.
 - **Because I don't have time, this website is not responsive yet**
 ## Features
 
