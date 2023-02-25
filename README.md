@@ -24,9 +24,11 @@ My Netflix clone web app is an excellent tool for anyone who is interested in im
 ##### Login and register page
 https://user-images.githubusercontent.com/90843926/221368042-8adb35a0-0630-4694-ace8-b72a1e8412ca.mp4
 ##### Movie, TV Show, Trending, My List Pages
-
+https://user-images.githubusercontent.com/90843926/221368506-fb5f44dd-9816-4d32-a11a-e88746f7eebb.mp4
 ##### Search Page
-
+https://user-images.githubusercontent.com/90843926/221368720-69c7738c-cd16-4ed8-a152-eca1276c9f23.mp4
 ##### Edit profile page
-
+https://user-images.githubusercontent.com/90843926/221369002-4e6976cb-28db-4e2e-9395-8ad069b3086d.mp4
+##### Watch Page
+https://user-images.githubusercontent.com/90843926/221369264-90b14e39-4839-440e-a1f7-4bc47c3fcee7.mp4
 #### Live Demo Here: (https://react-authentication-cb1e5.web.app)
